@@ -23,6 +23,10 @@
             return new Vec3(Cross(this, rhs).Components);
         }
 
+        /// <summary>
+        /// Converts an int vector to a float vector.
+        /// </summary>
+        /// <param name="vec">Vector to convert.</param>
         public static implicit operator FVec2(Vec2 vec)
         {
             return new FVec2(vec.X, vec.Y);

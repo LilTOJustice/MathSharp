@@ -10,6 +10,9 @@ namespace MathSharp
     public class Vector<T> : IEquatable<Vector<T>>
         where T : INumber<T>
     {
+        /// <summary>
+        /// Internal buffer for the vector's contents.
+        /// </summary>
         protected T[] vec;
 
         /// <summary>
@@ -208,6 +211,10 @@ namespace MathSharp
             return System.Math.Sqrt(Convert.ToDouble(len));
         }
 
+        /// <summary>
+        /// Converts the vector to string representation.
+        /// </summary>
+        /// <returns>A string representing the vector.</returns>
         public override string ToString()
         {
             StringBuilder stringBuilder = new StringBuilder();
@@ -285,11 +292,13 @@ namespace MathSharp
             return true;
         }
 
+        /// <inheritdoc cref="object.GetHashCode"/>
         public override int GetHashCode()
         {
             return ((object)this).GetHashCode();
         }
 
+        /// <inheritdoc cref="Equals(Vector{T}?)"/>
         public override bool Equals(object? obj)
         {
             return Equals(obj as Vector<T>);

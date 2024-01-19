@@ -29,6 +29,7 @@
             return Cross(this, rhs);
         }
 
+        /// <inheritdoc cref="FVec2.explicit operator Vec2(FVec2)"/>
         public static explicit operator Vec3(FVec3 vec)
         {
             return new Vec3((int)vec.X, (int)vec.Y, (int)vec.Z);

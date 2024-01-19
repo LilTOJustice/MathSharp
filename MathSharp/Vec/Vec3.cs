@@ -23,6 +23,7 @@
             return new Vec3(Cross((Vector3<int>)this, rhs).Components);
         }
 
+        /// <inheritdoc cref="Vec2.implicit operator FVec2(Vec2)"/>
         public static implicit operator FVec3(Vec3 vec)
         {
             return new FVec3(vec.X, vec.Y, vec.Z);

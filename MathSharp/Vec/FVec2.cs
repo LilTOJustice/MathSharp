@@ -39,6 +39,10 @@
             return new FVec2(X * System.Math.Cos(radians) - Y * System.Math.Sin(radians), X * System.Math.Sin(radians) + Y * System.Math.Cos(radians));
         }
 
+        /// <summary>
+        /// Converts a float vector to an int vector by integer casting the components.
+        /// </summary>
+        /// <param name="vec">Vector to convert.</param>
         public static explicit operator Vec2(FVec2 vec)
         {
             return new Vec2((int)vec.X, (int)vec.Y);

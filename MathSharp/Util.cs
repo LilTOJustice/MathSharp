@@ -10,7 +10,10 @@
         /// </summary>
         public class Constants
         {
-            public const double DEGPERPI = 180 / System.Math.PI;
+            /// <summary>
+            /// Constant 180 / PI.
+            /// </summary>
+            public const double DEGPERPI = 180 / Math.PI;
         }
 
         /// <summary>

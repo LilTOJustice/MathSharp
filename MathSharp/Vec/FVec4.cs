@@ -17,6 +17,7 @@
         /// <inheritdoc cref="Vector4{T}.Vector4(T, T, T, T)"/>
         public FVec4(double X, double Y, double Z, double W) : base(X, Y, Z, W) { }
 
+        /// <inheritdoc cref="FVec2.explicit operator Vec2(FVec2)"/>
         public static explicit operator Vec4(FVec4 vec)
         {
             return new Vec4((int)vec.X, (int)vec.Y, (int)vec.Z, (int)vec.W);
