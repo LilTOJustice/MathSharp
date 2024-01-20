@@ -78,7 +78,7 @@ namespace MathSharp
             return new Vector2<T>(((Vector<T>)lhs + rhs).Components);
         }
 
-        /// <inheritdoc cref="Vector{T}.operator +(Vector{T}, Vector{T})"/> 
+        /// <inheritdoc cref="Vector{T}.operator -(Vector{T}, Vector{T})"/> 
         public static Vector2<T> operator -(Vector2<T> lhs, Vector2<T> rhs)
         {
             return new Vector2<T>(((Vector<T>)lhs - rhs).Components);
