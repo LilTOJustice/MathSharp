@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-namespace MathSharp
+﻿namespace MathSharp
 {
     /// <summary>
     /// Degree representation of an angle.

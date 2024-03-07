@@ -1,5 +1,8 @@
 ﻿namespace MathSharp
 {
+    /// <summary>
+    /// Collection of math operations.
+    /// </summary>
     public class Operations
     {
         /// <summary>
