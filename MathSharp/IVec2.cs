@@ -1,6 +1,4 @@
-﻿using System.Net.Http.Headers;
-using System.Numerics;
-using System.Runtime.CompilerServices;
+﻿using System.Numerics;
 
 namespace MathSharp
 {
@@ -10,7 +8,7 @@ namespace MathSharp
     /// <typeparam name="TSelf">Type implementing the interface.</typeparam>
     /// <typeparam name="TBase">Base type of the vector. Must be of type <see cref="INumber{TSelf}"/>.</typeparam>
     /// <typeparam name="TFloat">Type used for forced float situations (such as <see cref="Mag"/>). Must be of type <see cref="IFloatingPoint{TSelf}"/>.</typeparam>
-    /// <typeparam name="TVFloat">Type used for forced vector float situations (such as <see cref="Rotate(IAngle)"/>). Must be of type <see cref="IVec2{TSelf, TBase, TFloat, TVFloat}"/>.</typeparam>
+    /// <typeparam name="TVFloat">Type used for forced vector float situations (such as <see cref="Norm"/>). Must be of type <see cref="IVec2{TSelf, TBase, TFloat, TVFloat}"/>.</typeparam>
     public interface IVec2<TSelf, TBase, TFloat, TVFloat> : IEquatable<IVec2<TSelf, TBase, TFloat, TVFloat>>
         where TSelf : IVec2<TSelf, TBase, TFloat, TVFloat>, new()
         where TBase : INumber<TBase>
@@ -35,8 +33,6 @@ namespace MathSharp
         /// <summary>
         /// Indexer for the vector. 0 is the x component and so on.
         /// </summary>
-        /// <param name="i"></param>
-        /// <returns></returns>
         public TBase this[int i] { get; set; }
 
         /// <summary>
@@ -79,53 +75,46 @@ namespace MathSharp
         /// <summary>
         /// Computes the sum of two vectors.
         /// </summary>
-        public static TSelf operator +(
-            in IVec2<TSelf, TBase, TFloat, TVFloat> left,
-            in IVec2<TSelf, TBase, TFloat, TVFloat> right)
-            => new TSelf { X = left.X + right.X, Y = left.Y + right.Y };
+        public TSelf IAdd(in IVec2<TSelf, TBase, TFloat, TVFloat> other)
+            => new TSelf { X = X + other.X, Y = Y + other.Y };
 
         /// <summary>
         /// Computes the difference of two vectors.
         /// </summary>
-        public static TSelf operator -(
-            in IVec2<TSelf, TBase, TFloat, TVFloat> left,
-            in IVec2<TSelf, TBase, TFloat, TVFloat> right)
-            => new TSelf { X = left.X - right.X, Y = left.Y - right.Y };
+        public TSelf ISub(in IVec2<TSelf, TBase, TFloat, TVFloat> other)
+            => new TSelf { X = X - other.X, Y = Y - other.Y };
 
         /// <summary>
         /// Computes the Hadamard product of two vectors, also known as the component-wise product (<see href="https://en.wikipedia.org/wiki/Hadamard_product_(matrices)"/>).
         /// </summary>
-        public static TSelf operator *(
-            in IVec2<TSelf, TBase, TFloat, TVFloat> left,
-            in IVec2<TSelf, TBase, TFloat, TVFloat> right)
-            => new TSelf { X = left.X * right.X, Y = left.Y * right.Y };
+        public TSelf IMul(in IVec2<TSelf, TBase, TFloat, TVFloat> other)
+            => new TSelf { X = X * other.X, Y = Y * other.Y };
 
         /// <summary>
         /// Computes the product of a vector and a scalar.
         /// </summary>
-        /// <param name="left"></param>
-        /// <param name="scalar"></param>
-        /// <returns></returns>
-        public static TSelf operator *(
-            in IVec2<TSelf, TBase, TFloat, TVFloat> left,
-            TBase scalar)
-            => new TSelf { X = left.X * scalar, Y = left.Y * scalar };
+        public TSelf IMul(TBase scalar)
+            => new TSelf { X = X * scalar, Y = Y * scalar };
+
+        /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.IMul(TBase)"/>
+        public TVFloat IFMul(TFloat scalar)
+            => new TVFloat { X = ToTFloat(X) * scalar, Y = ToTFloat(Y) * scalar };
 
         /// <summary>
         /// Computes the Hadamar inverse product (division) of two vectors, also known as the component-wise inverse product (<see href="https://en.wikipedia.org/wiki/Hadamard_product_(matrices)"/>).
         /// </summary>
-        public static TSelf operator /(
-            in IVec2<TSelf, TBase, TFloat, TVFloat> left,
-            in IVec2<TSelf, TBase, TFloat, TVFloat> right)
-            => new TSelf { X = left.X / right.X, Y = left.Y / right.Y };
+        public TSelf IDiv(in IVec2<TSelf, TBase, TFloat, TVFloat> other)
+            => new TSelf { X = X / other.X, Y = Y / other.Y };
 
         /// <summary>
         /// Computes the division of a vector by a scalar.
         /// </summary>
-        public static TSelf operator /(
-            in IVec2<TSelf, TBase, TFloat, TVFloat> left,
-            TBase scalar)
-            => new TSelf { X = left.X / scalar, Y = left.Y / scalar };
+        public TSelf IDiv(TBase scalar)
+            => new TSelf { X = X / scalar, Y = Y / scalar };
+
+        /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.IDiv(TBase)"/>
+        public TVFloat IFDiv(TFloat scalar)
+            => new TVFloat { X = ToTFloat(X) / scalar, Y = ToTFloat(Y) / scalar };
 
         // Default implementations of required methods.
         /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.Components"/>
@@ -162,24 +151,29 @@ namespace MathSharp
         }
 
         /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.Rotate(IAngle)"/>
-        public FVec2 IRotate(IAngle angle)
-        {
-            return new FVec2(
-                Convert.ToDouble(X) * Math.Cos(angle.Radians) - Convert.ToDouble(Y) * Math.Sin(angle.Radians),
-                Convert.ToDouble(X) * Math.Sin(angle.Radians) + Convert.ToDouble(Y) * Math.Cos(angle.Radians));
-        }
+        public TVFloat IRotate(IAngle angle)
+            => new TVFloat
+            {
+                X = ToTFloat(X) * ToTFloat(Math.Cos(angle.Radians)) -
+                ToTFloat(Y) * ToTFloat(Math.Sin(angle.Radians)),
+                Y = ToTFloat(X) * ToTFloat(Math.Sin(angle.Radians)) +
+                ToTFloat(Y) * ToTFloat(Math.Cos(angle.Radians))
+            };
 
         /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.Mag2"/>
         public TBase IMag2() => X * X + Y * Y;
 
         /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.Mag"/>
-        public double IMag() => Math.Sqrt(Convert.ToDouble(Mag2()));
+        public TFloat IMag() => ToTFloat(Math.Sqrt(Convert.ToDouble(Mag2())));
 
         /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.Dot"/>
         public TBase IDot(in TSelf other) => X * other.X + Y * other.Y;
 
         /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.Cross2d"/>
         public TBase ICross2d(in TSelf other) => X * other.Y - Y * other.X;
+
+        /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.Norm"/>
+        public TVFloat INorm() => IFDiv(Mag());
 
         /// <summary>
         /// Computes whether two vectors are equal.
@@ -202,5 +196,9 @@ namespace MathSharp
 
         /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.ToString"/>
         public string IToString() => $"<{X}, {Y}>";
+
+        private static TFloat ToTFloat(double d) => (TFloat)Convert.ChangeType(d, typeof(TFloat));
+
+        private static TFloat ToTFloat(TBase b) => (TFloat)Convert.ChangeType(b, typeof(TFloat));
     }
 }

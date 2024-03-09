@@ -50,29 +50,29 @@
         /// </summary>
         public static implicit operator FVec2(in Vec2 vec) => new FVec2(vec.X, vec.Y);
 
-        /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.operator +(in IVec2{TSelf, TBase, TFloat, TVFloat}, in IVec2{TSelf, TBase, TFloat, TVFloat})"/>
-        public static Vec2 operator +(in Vec2 lhs, in Vec2 rhs) => lhs + (rhs as IVec2<Vec2, int, double, FVec2>);
+        /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.IAdd(in IVec2{TSelf, TBase, TFloat, TVFloat})"/>
+        public static Vec2 operator +(in Vec2 lhs, in Vec2 rhs) => (lhs as IVec2<Vec2, int, double, FVec2>).IAdd(rhs);
 
-        /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.operator -(in IVec2{TSelf, TBase, TFloat, TVFloat}, in IVec2{TSelf, TBase, TFloat, TVFloat})"/>
-        public static Vec2 operator -(in Vec2 lhs, in Vec2 rhs) => lhs - (rhs as IVec2<Vec2, int, double, FVec2>);
+        /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.ISub(in IVec2{TSelf, TBase, TFloat, TVFloat})"/>
+        public static Vec2 operator -(in Vec2 lhs, in Vec2 rhs) => (lhs as IVec2<Vec2, int, double, FVec2>).ISub(rhs);
 
-        /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.operator *(in IVec2{TSelf, TBase, TFloat, TVFloat}, in IVec2{TSelf, TBase, TFloat, TVFloat})"/>
-        public static Vec2 operator *(in Vec2 lhs, in Vec2 rhs) => lhs * (rhs as IVec2<Vec2, int, double, FVec2>);
+        /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.IMul(in IVec2{TSelf, TBase, TFloat, TVFloat})"/>
+        public static Vec2 operator *(in Vec2 lhs, in Vec2 rhs) => (lhs as IVec2<Vec2, int, double, FVec2>).IMul(rhs);
 
-        /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.operator *(in IVec2{TSelf, TBase, TFloat, TVFloat}, TBase)"/>
-        public static Vec2 operator *(in Vec2 lhs, int scalar) => (lhs as IVec2<Vec2, int, double, FVec2>) * scalar;
+        /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.IMul(TBase)"/>
+        public static Vec2 operator *(in Vec2 lhs, int scalar) => (lhs as IVec2<Vec2, int, double, FVec2>).IMul(scalar);
 
-        /// <inheritdoc cref="FVec2.operator *(in FVec2, double)"/>
-        public static FVec2 operator *(in Vec2 lhs, double scalar) => (FVec2)lhs * scalar;
+        /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.IFMul(TFloat)"/>
+        public static FVec2 operator *(in Vec2 lhs, double scalar) => (lhs as IVec2<Vec2, int, double, FVec2>).IFMul(scalar);
 
-        /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.operator /(in IVec2{TSelf, TBase, TFloat, TVFloat}, in IVec2{TSelf, TBase, TFloat, TVFloat})"/>
-        public static Vec2 operator /(in Vec2 lhs, in Vec2 rhs) => lhs / (rhs as IVec2<Vec2, int, double, FVec2>);
+        /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.IDiv(in IVec2{TSelf, TBase, TFloat, TVFloat})"/>
+        public static Vec2 operator /(in Vec2 lhs, in Vec2 rhs) => (lhs as IVec2<Vec2, int, double, FVec2>).IDiv(rhs);
 
-        /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.operator /(in IVec2{TSelf, TBase, TFloat, TVFloat}, TBase)"/>
-        public static Vec2 operator /(in Vec2 lhs, int scalar) => (lhs as IVec2<Vec2, int, double, FVec2>) / scalar;
+        /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.IDiv(TBase)"/>
+        public static Vec2 operator /(in Vec2 lhs, int scalar) => (lhs as IVec2<Vec2, int, double, FVec2>).IDiv(scalar);
 
-        /// <inheritdoc cref="FVec4.operator /(FVec4, double)"/>
-        public static FVec2 operator /(in Vec2 lhs, double scalar) => (FVec2)lhs / scalar;
+        /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.IFDiv(TFloat)"/>
+        public static FVec2 operator /(in Vec2 lhs, double scalar) => (lhs as IVec2<Vec2, int, double, FVec2>).IFDiv(scalar);
 
         /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.operator ==(in TSelf, in TSelf)"/>
         public static bool operator ==(in Vec2 lhs, in Vec2 rhs) => lhs.Equals(rhs);
