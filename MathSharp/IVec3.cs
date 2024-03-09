@@ -124,6 +124,14 @@ namespace MathSharp
         /// <inheritdoc cref="IVec3{TSelf, TBase, TFloat, TVFloat}.Dot"/>
         public TBase IDot(in TSelf other) => X * other.X + Y * other.Y + Z * other.Z;
 
+        /// <inheritdoc cref="IVec3{TSelf, TBase, TFloat, TVFloat}.Cross(in TSelf)"/>
+        public TSelf ICross(in TSelf other) => new TSelf
+        {
+            X = Y * other.Z - Z * other.Y,
+            Y = Z * other.X - X * other.Z,
+            Z = X * other.Y - Y * other.X
+        };
+
         /// <summary>
         /// Computes the sum of two vectors.
         /// </summary>
