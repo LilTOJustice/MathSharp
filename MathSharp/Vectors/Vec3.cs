@@ -3,209 +3,94 @@
     /// <summary>
     /// A 3d vector of type int.
     /// </summary>
-    public struct Vec3 : IEquatable<Vec3>
+    public struct Vec3 : IVec3<Vec3, int, double, FVec3>
     {
-        /// <inheritdoc cref="FVec4.X"/>
+        /// <inheritdoc cref="IVec3{TSelf, TBase, TFloat, TVFloat}.X"/>
         public int X { get; set; }
 
-        /// <inheritdoc cref="FVec4.Y"/>
+        /// <inheritdoc cref="IVec3{TSelf, TBase, TFloat, TVFloat}.Y"/>
         public int Y { get; set; }
 
-        /// <inheritdoc cref="FVec4.Z"/>
+        /// <inheritdoc cref="IVec3{TSelf, TBase, TFloat, TVFloat}.Z"/>
         public int Z { get; set; }
 
-        /// <inheritdoc cref="FVec4.XY"/>
-        public Vec2 XY
-        {
-            get
-            {
-                return new Vec2(X, Y);
-            }
-            set
-            {
-                X = value.X;
-                Y = value.Y;
-            }
+        /// <inheritdoc cref="IVec3{TSelf, TBase, TFloat, TVFloat}.Components"/>
+        public int[] Components => (this as IVec3<Vec3, int, double, FVec3>).IComponents;
+
+        /// <inheritdoc cref="IVec3{TSelf, TBase, TFloat, TVFloat}.this[int]"/>
+        public int this[int i] {
+            get => (this as IVec3<Vec3, int, double, FVec3>).IIndexerGet(i);
+            set => (this as IVec3<Vec3, int, double, FVec3>).IIndexerSet(i, value);
         }
 
-        /// <inheritdoc cref="FVec4.XZ"/>
-        public Vec2 XZ
-        {
-            get
-            {
-                return new Vec2(X, Z);
-            }
-            set
-            {
-                X = value.X;
-                Z = value.Y;
-            }
-        }
-
-        /// <inheritdoc cref="FVec4.YZ"/>
-        public Vec2 YZ
-        {
-            get
-            {
-                return new Vec2(Y, Z);
-            }
-            set
-            {
-                Y = value.X;
-                Z = value.Y;
-            }
-        }
-
-        /// <inheritdoc cref="FVec4.Components"/>
-        public int[] Components => new int[] { X, Y, Z };
-
-        /// <inheritdoc cref="FVec4(double, double, double, double)"/>
+        /// <summary>
+        /// Constructs a new 3d vector.
+        /// </summary>
         public Vec3(int x, int y, int z) { X = x; Y = y; Z = z; }
 
-        /// <inheritdoc cref="FVec4.this[int]"/>
-        public int this[int i] {
-            get
-            {
-                switch (i)
-                {
-                    case 0:
-                        return X;
-                    case 1:
-                        return Y;
-                    case 2:
-                        return Z;
-                    default:
-                        throw new IndexOutOfRangeException();
-                }
-            }
-            set
-            {
-                switch (i)
-                {
-                    case 0:
-                        X = value;
-                        break;
-                    case 1:
-                        Y = value;
-                        break;
-                    case 2:
-                        Z = value;
-                        break;
-                    default:
-                        throw new IndexOutOfRangeException();
-                }
-            }
-        }
+        /// <inheritdoc cref="IVec3{TSelf, TBase, TFloat, TVFloat}.Rotate(in AVec3)"/>
+        public FVec3 Rotate(in AVec3 angle) => (this as IVec3<Vec3, int, double, FVec3>).IRotate(angle);
 
-        /// <inheritdoc cref="FVec4.Mag2"/>
-        public int Mag2()
-        {
-            return X * X + Y * Y + Z * Z;
-        }
+        /// <inheritdoc cref="IVec3{TSelf, TBase, TFloat, TVFloat}.Mag2"/>
+        public int Mag2() => (this as IVec3<Vec3, int, double, FVec3>).IMag2();
 
-        /// <inheritdoc cref="FVec4.Mag"/>
-        public double Mag()
-        {
-            return Math.Sqrt(Mag2());
-        }
+        /// <inheritdoc cref="IVec3{TSelf, TBase, TFloat, TVFloat}.Mag"/>
+        public double Mag() => (this as IVec3<Vec3, int, double, FVec3>).IMag();
 
-        /// <inheritdoc cref="FVec4.Dot(FVec4)"/>
-        public int Dot(Vec3 other)
-        {
-            return X * other.X + Y * other.Y + Z * other.Z;
-        }
+        /// <inheritdoc cref="IVec3{TSelf, TBase, TFloat, TVFloat}.Dot"/>
+        public int Dot(in Vec3 other) => (this as IVec3<Vec3, int, double, FVec3>).IDot(other);
 
-        /// <inheritdoc cref="FVec3.Cross(FVec3)"/>
-        public Vec3 Cross(Vec3 rhs)
-        {
-            return new Vec3(
-                Y * rhs.Z - Z * rhs.Y,
-                Z * rhs.X - X * rhs.Z,
-                X * rhs.Y - Y * rhs.X);
-        }
+        /// <inheritdoc cref="IVec3{TSelf, TBase, TFloat, TVFloat}.Cross"/>
+        public Vec3 Cross(in Vec3 rhs) => (this as IVec3<Vec3, int, double, FVec3>).ICross(rhs);
 
-        /// <inheritdoc cref="Vec4.implicit operator FVec4(Vec4)"/>
-        public static implicit operator FVec3(Vec3 vec)
-        {
-            return new FVec3(vec.X, vec.Y, vec.Z);
-        }
+        /// <inheritdoc cref="IVec3{TSelf, TBase, TFloat, TVFloat}.Norm"/>
+        public FVec3 Norm() => (this as IVec3<Vec3, int, double, FVec3>).INorm();
 
-        /// <inheritdoc cref="FVec4.operator +(FVec4, FVec4)"/>
-        public static Vec3 operator +(Vec3 lhs, Vec3 rhs)
-        {
-            return new Vec3(lhs.X + rhs.X, lhs.Y + rhs.Y, lhs.Z + rhs.Z);
-        }
+        /// <summary>
+        /// Converts a floating point vector to an integer vector.
+        /// </summary>
+        public static explicit operator Vec3(in FVec3 vec) => new Vec3((int)vec.X, (int)vec.Y, (int)vec.Z);
 
-        /// <inheritdoc cref="FVec4.operator -(FVec4, FVec4)"/>
-        public static Vec3 operator -(Vec3 lhs, Vec3 rhs)
-        {
-            return new Vec3(lhs.X - rhs.X, lhs.Y - rhs.Y, lhs.Z - rhs.Z);
-        }
+        /// <inheritdoc cref="IVec3{TSelf, TBase, TFloat, TVFloat}.IAdd(in TSelf)"/>
+        public static Vec3 operator +(in Vec3 lhs, in Vec3 rhs) => (lhs as IVec3<Vec3, int, double, FVec3>).IAdd(rhs);
 
-        /// <inheritdoc cref="FVec4.operator *(FVec4, FVec4)"/>
-        public static Vec3 operator *(Vec3 lhs, Vec3 rhs)
-        {
-            return new Vec3(lhs.X * rhs.X, lhs.Y * rhs.Y, lhs.Z * rhs.Z);
-        }
+        /// <inheritdoc cref="IVec3{TSelf, TBase, TFloat, TVFloat}.ISub(in TSelf)"/>
+        public static Vec3 operator -(in Vec3 lhs, in Vec3 rhs) => (lhs as IVec3<Vec3, int, double, FVec3>).ISub(rhs);
 
-        /// <inheritdoc cref="FVec4.operator *(FVec4, double)"/>
-        public static Vec3 operator *(Vec3 lhs, int scalar)
-        {
-            return new Vec3(lhs.X * scalar, lhs.Y * scalar, lhs.Z * scalar);
-        }
+        /// <inheritdoc cref="IVec3{TSelf, TBase, TFloat, TVFloat}.IMul(in TSelf)"/>
+        public static Vec3 operator *(in Vec3 lhs, in Vec3 rhs) => (lhs as IVec3<Vec3, int, double, FVec3>).IMul(rhs);
 
-        /// <inheritdoc cref="FVec4.operator *(FVec4, double)"/>
-        public static FVec3 operator *(Vec3 lhs, double scalar)
-        {
-            return new FVec3(lhs.X * scalar, lhs.Y * scalar, lhs.Z * scalar);
-        }
+        /// <inheritdoc cref="IVec3{TSelf, TBase, TFloat, TVFloat}.IMul(TBase)"/>
+        public static Vec3 operator *(in Vec3 lhs, int scalar) => (lhs as IVec3<Vec3, int, double, FVec3>).IMul(scalar);
 
-        /// <inheritdoc cref="FVec4.operator /(FVec4, FVec4)"/>
-        public static Vec3 operator /(Vec3 lhs, Vec3 rhs)
-        {
-            return new Vec3(lhs.X / rhs.X, lhs.Y / rhs.Y, lhs.Z / rhs.Z);
-        }
+        /// <inheritdoc cref="IVec3{TSelf, TBase, TFloat, TVFloat}.IMul(TBase)"/>
+        public static FVec3 operator *(in Vec3 lhs, double scalar) => (lhs as IVec3<Vec3, int, double, FVec3>).IFMul(scalar);
 
-        /// <inheritdoc cref="FVec4.operator /(FVec4, double)"/>
-        public static Vec3 operator /(Vec3 lhs, int scalar)
-        {
-            return new Vec3(lhs.X / scalar, lhs.Y / scalar, lhs.Z / scalar);
-        }
+        /// <inheritdoc cref="IVec3{TSelf, TBase, TFloat, TVFloat}.IDiv(in TSelf)"/>
+        public static Vec3 operator /(in Vec3 lhs, in Vec3 rhs) => (lhs as IVec3<Vec3, int, double, FVec3>).IDiv(rhs);
 
-        /// <inheritdoc cref="FVec4.operator /(FVec4, double)"/>
-        public static FVec3 operator /(Vec3 lhs, double scalar)
-        {
-            return new FVec3(lhs.X / scalar, lhs.Y / scalar, lhs.Z / scalar);
-        }
+        /// <inheritdoc cref="IVec3{TSelf, TBase, TFloat, TVFloat}.IDiv(TBase)"/>
+        public static Vec3 operator /(in Vec3 lhs, int scalar) => (lhs as IVec3<Vec3, int, double, FVec3>).IDiv(scalar);
 
-        /// <inheritdoc cref="FVec4.Equals(FVec4)"/>
-        public bool Equals(Vec3 other)
-        {
-            return X == other.X && Y == other.Y && Z == other.Z;
-        }
+        /// <inheritdoc cref="IVec3{TSelf, TBase, TFloat, TVFloat}.IDiv(TBase)"/>
+        public static FVec3 operator /(in Vec3 lhs, double scalar) => (lhs as IVec3<Vec3, int, double, FVec3>).IFDiv(scalar);
 
-        /// <inheritdoc cref="Equals(Vec3)"/>
-        public static bool operator ==(Vec3 lhs, Vec3 rhs)
-        {
-            return lhs.Equals(rhs);
-        }
+        /// <inheritdoc cref="Equals(IVec3{Vec3, int, double, FVec3}?)"/>
+        public static bool operator ==(in Vec3 lhs, in Vec3 rhs) => lhs.Equals(rhs);
 
-        /// <inheritdoc cref="FVec4.operator !=(FVec4, FVec4)"/>
-        public static bool operator !=(Vec3 lhs, Vec3 rhs)
-        {
-            return !lhs.Equals(rhs);
-        }
+        /// <inheritdoc cref="Equals(IVec3{Vec3, int, double, FVec3}?)"/>
+        public static bool operator !=(in Vec3 lhs, in Vec3 rhs) => !lhs.Equals(rhs);
 
-        /// <inheritdoc cref="FVec4.Equals(object?)"/>
-        public override bool Equals(object? obj)
-        {
-            return obj is Vec3 && Equals((Vec3)obj);
-        }
+        /// <inheritdoc cref="IVec3{TSelf, TBase, TFloat, TVFloat}.IEquals(in TSelf)"/>
+        public bool Equals(IVec3<Vec3, int, double, FVec3>? other) => (this as IVec3<Vec3, int, double, FVec3>).IEquals(other);
+
+        /// <inheritdoc cref="object.Equals(object?)"/>
+        public override bool Equals(object? obj) => (this as IVec3<Vec3, int, double, FVec3>).IEquals(obj);
 
         /// <inheritdoc cref="object.GetHashCode"/>
-        public override int GetHashCode()
-        {
-            return ((object)this).GetHashCode();
-        }
+        public override int GetHashCode() => (this as IVec3<Vec3, int, double, FVec3>).IGetHashCode();
+
+        /// <inheritdoc cref="IVec3{TSelf, TBase, TFloat, TVFloat}.IToString"/>
+        public override string ToString() => (this as IVec3<Vec3, int, double, FVec3>).IToString();
     }
 }

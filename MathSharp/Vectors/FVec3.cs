@@ -15,7 +15,7 @@
         public double Z { get; set; }
 
         /// <inheritdoc cref="IVec3{TSelf, TBase, TFloat, TVFloat}.Components"/>
-        public double[] Components => new[] { X, Y, Z };
+        public double[] Components => (this as IVec3<FVec3, double, double, FVec3>).IComponents;
 
         /// <inheritdoc cref="IVec3{TSelf, TBase, TFloat, TVFloat}.this[int]"/>
         public double this[int i] {
@@ -49,31 +49,31 @@
         /// <summary>
         /// Converts a floating point vector to an integer vector.
         /// </summary>
-        public static explicit operator Vec3(FVec3 vec) => new Vec3((int)vec.X, (int)vec.Y, (int)vec.Z);
+        public static explicit operator Vec3(in FVec3 vec) => new Vec3((int)vec.X, (int)vec.Y, (int)vec.Z);
 
         /// <inheritdoc cref="IVec3{TSelf, TBase, TFloat, TVFloat}.IAdd(in TSelf)"/>
-        public static FVec3 operator +(FVec3 lhs, FVec3 rhs) => (lhs as IVec3<FVec3, double, double, FVec3>).IAdd(rhs);
+        public static FVec3 operator +(in FVec3 lhs, in FVec3 rhs) => (lhs as IVec3<FVec3, double, double, FVec3>).IAdd(rhs);
 
         /// <inheritdoc cref="IVec3{TSelf, TBase, TFloat, TVFloat}.ISub(in TSelf)"/>
-        public static FVec3 operator -(FVec3 lhs, FVec3 rhs) => (lhs as IVec3<FVec3, double, double, FVec3>).ISub(rhs);
+        public static FVec3 operator -(in FVec3 lhs, in FVec3 rhs) => (lhs as IVec3<FVec3, double, double, FVec3>).ISub(rhs);
 
         /// <inheritdoc cref="IVec3{TSelf, TBase, TFloat, TVFloat}.IMul(in TSelf)"/>
-        public static FVec3 operator *(FVec3 lhs, FVec3 rhs) => (lhs as IVec3<FVec3, double, double, FVec3>).IMul(rhs);
+        public static FVec3 operator *(in FVec3 lhs, in FVec3 rhs) => (lhs as IVec3<FVec3, double, double, FVec3>).IMul(rhs);
 
         /// <inheritdoc cref="IVec3{TSelf, TBase, TFloat, TVFloat}.IMul(TBase)"/>
-        public static FVec3 operator *(FVec3 lhs, double scalar) => (lhs as IVec3<FVec3, double, double, FVec3>).IMul(scalar);
+        public static FVec3 operator *(in FVec3 lhs, double scalar) => (lhs as IVec3<FVec3, double, double, FVec3>).IMul(scalar);
 
         /// <inheritdoc cref="IVec3{TSelf, TBase, TFloat, TVFloat}.IDiv(in TSelf)"/>
-        public static FVec3 operator /(FVec3 lhs, FVec3 rhs) => (lhs as IVec3<FVec3, double, double, FVec3>).IDiv(rhs);
+        public static FVec3 operator /(in FVec3 lhs, in FVec3 rhs) => (lhs as IVec3<FVec3, double, double, FVec3>).IDiv(rhs);
 
         /// <inheritdoc cref="IVec3{TSelf, TBase, TFloat, TVFloat}.IDiv(TBase)"/>
-        public static FVec3 operator /(FVec3 lhs, double scalar) => (lhs as IVec3<FVec3, double, double, FVec3>).IDiv(scalar);
+        public static FVec3 operator /(in FVec3 lhs, double scalar) => (lhs as IVec3<FVec3, double, double, FVec3>).IDiv(scalar);
 
         /// <inheritdoc cref="Equals(IVec3{FVec3, double, double, FVec3}?)"/>
-        public static bool operator ==(FVec3 lhs, FVec3 rhs) => lhs.Equals(rhs);
+        public static bool operator ==(in FVec3 lhs, in FVec3 rhs) => lhs.Equals(rhs);
 
         /// <inheritdoc cref="Equals(IVec3{FVec3, double, double, FVec3}?)"/>
-        public static bool operator !=(FVec3 lhs, FVec3 rhs) => !lhs.Equals(rhs);
+        public static bool operator !=(in FVec3 lhs, in FVec3 rhs) => !lhs.Equals(rhs);
 
         /// <inheritdoc cref="IVec3{TSelf, TBase, TFloat, TVFloat}.IEquals(in TSelf)"/>
         public bool Equals(IVec3<FVec3, double, double, FVec3>? other) => (this as IVec3<FVec3, double, double, FVec3>).IEquals(other);
