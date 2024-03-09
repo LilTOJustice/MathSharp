@@ -50,18 +50,12 @@
         /// Computes the cross product between two vectors <see href="https://en.wikipedia.org/wiki/Cross_product"/>.
         /// </summary>
         /// <returns>A 3d vector orthogonal to the xy plane.</returns>
-        public FVec3 Cross(in FVec2 rhs)
-        {
-            return new FVec3(0, 0, Cross2d(rhs));
-        }
+        public FVec3 Cross(in FVec2 rhs) => new FVec3(0, 0, Cross2d(rhs));
 
         /// <summary>
         /// Converts a floating point vector to an integer vector.
         /// </summary>
-        public static explicit operator Vec2(in FVec2 vec)
-        {
-            return new Vec2((int)vec.X, (int)vec.Y);
-        }
+        public static explicit operator Vec2(in FVec2 vec) => new Vec2((int)vec.X, (int)vec.Y);
 
         /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.operator +(in IVec2{TSelf, TBase, TFloat, TVFloat}, in IVec2{TSelf, TBase, TFloat, TVFloat})"/>
         public static FVec2 operator +(in FVec2 lhs, in FVec2 rhs) => lhs + (rhs as IVec2<FVec2, double, double, FVec2>);
@@ -72,18 +66,14 @@
         /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.operator *(in IVec2{TSelf, TBase, TFloat, TVFloat}, in IVec2{TSelf, TBase, TFloat, TVFloat})"/>
         public static FVec2 operator *(in FVec2 lhs, in FVec2 rhs) => lhs * (rhs as IVec2<FVec2, double, double, FVec2>);
 
-        /// <summary>
-        /// Multiplies a vector by a scalar.
-        /// </summary>
-        public static FVec2 operator *(in FVec2 lhs, double scalar) => new FVec2(lhs.X * scalar, lhs.Y * scalar);
+        /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.operator *(in IVec2{TSelf, TBase, TFloat, TVFloat}, TBase)"/>
+        public static FVec2 operator *(in FVec2 lhs, double scalar) => (lhs as IVec2<FVec2, double, double, FVec2>) * scalar;
 
         /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.operator /(in IVec2{TSelf, TBase, TFloat, TVFloat}, in IVec2{TSelf, TBase, TFloat, TVFloat})"/>
         public static FVec2 operator /(in FVec2 lhs, in FVec2 rhs) => lhs / (rhs as IVec2<FVec2, double, double, FVec2>);
 
-        /// <summary>
-        /// Divides a vector by a scalar.
-        /// </summary>
-        public static FVec2 operator /(in FVec2 lhs, double scalar) => new FVec2(lhs.X / scalar, lhs.Y / scalar);
+        /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.operator /(in IVec2{TSelf, TBase, TFloat, TVFloat}, TBase)"/>
+        public static FVec2 operator /(in FVec2 lhs, double scalar) => (lhs as IVec2<FVec2, double, double, FVec2>) / scalar;
 
         /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.operator ==(in TSelf, in TSelf)"/>
         public static bool operator ==(in FVec2 lhs, in FVec2 rhs) => lhs.Equals(rhs);

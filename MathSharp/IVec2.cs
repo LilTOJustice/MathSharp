@@ -95,18 +95,37 @@ namespace MathSharp
         /// <summary>
         /// Computes the Hadamard product of two vectors, also known as the component-wise product (<see href="https://en.wikipedia.org/wiki/Hadamard_product_(matrices)"/>).
         /// </summary>
-        /// <param name="left"></param>
-        /// <param name="right"></param>
-        /// <returns></returns>
         public static TSelf operator *(
             in IVec2<TSelf, TBase, TFloat, TVFloat> left,
             in IVec2<TSelf, TBase, TFloat, TVFloat> right)
             => new TSelf { X = left.X * right.X, Y = left.Y * right.Y };
 
+        /// <summary>
+        /// Computes the product of a vector and a scalar.
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="scalar"></param>
+        /// <returns></returns>
+        public static TSelf operator *(
+            in IVec2<TSelf, TBase, TFloat, TVFloat> left,
+            TBase scalar)
+            => new TSelf { X = left.X * scalar, Y = left.Y * scalar };
+
+        /// <summary>
+        /// Computes the Hadamar inverse product (division) of two vectors, also known as the component-wise inverse product (<see href="https://en.wikipedia.org/wiki/Hadamard_product_(matrices)"/>).
+        /// </summary>
         public static TSelf operator /(
             in IVec2<TSelf, TBase, TFloat, TVFloat> left,
             in IVec2<TSelf, TBase, TFloat, TVFloat> right)
             => new TSelf { X = left.X / right.X, Y = left.Y / right.Y };
+
+        /// <summary>
+        /// Computes the division of a vector by a scalar.
+        /// </summary>
+        public static TSelf operator /(
+            in IVec2<TSelf, TBase, TFloat, TVFloat> left,
+            TBase scalar)
+            => new TSelf { X = left.X / scalar, Y = left.Y / scalar };
 
         // Default implementations of required methods.
         /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.Components"/>
@@ -127,7 +146,7 @@ namespace MathSharp
         }
 
         /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.this[int]"/>
-        public void IIndexerSet(int i, in TBase value)
+        public void IIndexerSet(int i, TBase value)
         {
             switch (i)
             {
