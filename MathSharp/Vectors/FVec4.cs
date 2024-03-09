@@ -46,7 +46,7 @@
         /// <summary>
         /// Converts a float vector to an int vector.
         /// </summary>
-        public static explicit operator Vec4(FVec4 vec) => new Vec4((int)vec.X, (int)vec.Y, (int)vec.Z, (int)vec.W);
+        public static explicit operator Vec4(in FVec4 vec) => new Vec4((int)vec.X, (int)vec.Y, (int)vec.Z, (int)vec.W);
 
         /// <inheritdoc cref="IVec4{TSelf, TBase, TFloat, TVFloat}.IAdd(in TSelf)"/>
         public static FVec4 operator +(in FVec4 lhs, in FVec4 rhs) => (lhs as IVec4<FVec4, double, double, FVec4>).IAdd(rhs);
