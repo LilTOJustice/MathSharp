@@ -71,51 +71,6 @@ namespace MathSharp
         /// </summary>
         public string ToString();
 
-        // Default implementations of operators.
-        /// <summary>
-        /// Computes the sum of two vectors.
-        /// </summary>
-        public TSelf IAdd(in IVec2<TSelf, TBase, TFloat, TVFloat> other)
-            => new TSelf { X = X + other.X, Y = Y + other.Y };
-
-        /// <summary>
-        /// Computes the difference of two vectors.
-        /// </summary>
-        public TSelf ISub(in IVec2<TSelf, TBase, TFloat, TVFloat> other)
-            => new TSelf { X = X - other.X, Y = Y - other.Y };
-
-        /// <summary>
-        /// Computes the Hadamard product of two vectors, also known as the component-wise product (<see href="https://en.wikipedia.org/wiki/Hadamard_product_(matrices)"/>).
-        /// </summary>
-        public TSelf IMul(in IVec2<TSelf, TBase, TFloat, TVFloat> other)
-            => new TSelf { X = X * other.X, Y = Y * other.Y };
-
-        /// <summary>
-        /// Computes the product of a vector and a scalar.
-        /// </summary>
-        public TSelf IMul(TBase scalar)
-            => new TSelf { X = X * scalar, Y = Y * scalar };
-
-        /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.IMul(TBase)"/>
-        public TVFloat IFMul(TFloat scalar)
-            => new TVFloat { X = ToTFloat(X) * scalar, Y = ToTFloat(Y) * scalar };
-
-        /// <summary>
-        /// Computes the Hadamar inverse product (division) of two vectors, also known as the component-wise inverse product (<see href="https://en.wikipedia.org/wiki/Hadamard_product_(matrices)"/>).
-        /// </summary>
-        public TSelf IDiv(in IVec2<TSelf, TBase, TFloat, TVFloat> other)
-            => new TSelf { X = X / other.X, Y = Y / other.Y };
-
-        /// <summary>
-        /// Computes the division of a vector by a scalar.
-        /// </summary>
-        public TSelf IDiv(TBase scalar)
-            => new TSelf { X = X / scalar, Y = Y / scalar };
-
-        /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.IDiv(TBase)"/>
-        public TVFloat IFDiv(TFloat scalar)
-            => new TVFloat { X = ToTFloat(X) / scalar, Y = ToTFloat(Y) / scalar };
-
         // Default implementations of required methods.
         /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.Components"/>
         TBase[] IComponents => new[] { X, Y };
@@ -174,6 +129,50 @@ namespace MathSharp
 
         /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.Norm"/>
         public TVFloat INorm() => IFDiv(Mag());
+
+        /// <summary>
+        /// Computes the sum of two vectors.
+        /// </summary>
+        public TSelf IAdd(in IVec2<TSelf, TBase, TFloat, TVFloat> other)
+            => new TSelf { X = X + other.X, Y = Y + other.Y };
+
+        /// <summary>
+        /// Computes the difference of two vectors.
+        /// </summary>
+        public TSelf ISub(in IVec2<TSelf, TBase, TFloat, TVFloat> other)
+            => new TSelf { X = X - other.X, Y = Y - other.Y };
+
+        /// <summary>
+        /// Computes the Hadamard product of two vectors, also known as the component-wise product (<see href="https://en.wikipedia.org/wiki/Hadamard_product_(matrices)"/>).
+        /// </summary>
+        public TSelf IMul(in IVec2<TSelf, TBase, TFloat, TVFloat> other)
+            => new TSelf { X = X * other.X, Y = Y * other.Y };
+
+        /// <summary>
+        /// Computes the product of a vector and a scalar.
+        /// </summary>
+        public TSelf IMul(TBase scalar)
+            => new TSelf { X = X * scalar, Y = Y * scalar };
+
+        /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.IMul(TBase)"/>
+        public TVFloat IFMul(TFloat scalar)
+            => new TVFloat { X = ToTFloat(X) * scalar, Y = ToTFloat(Y) * scalar };
+
+        /// <summary>
+        /// Computes the Hadamar inverse product (division) of two vectors, also known as the component-wise inverse product (<see href="https://en.wikipedia.org/wiki/Hadamard_product_(matrices)"/>).
+        /// </summary>
+        public TSelf IDiv(in IVec2<TSelf, TBase, TFloat, TVFloat> other)
+            => new TSelf { X = X / other.X, Y = Y / other.Y };
+
+        /// <summary>
+        /// Computes the division of a vector by a scalar.
+        /// </summary>
+        public TSelf IDiv(TBase scalar)
+            => new TSelf { X = X / scalar, Y = Y / scalar };
+
+        /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.IDiv(TBase)"/>
+        public TVFloat IFDiv(TFloat scalar)
+            => new TVFloat { X = ToTFloat(X) / scalar, Y = ToTFloat(Y) / scalar };
 
         /// <summary>
         /// Computes whether two vectors are equal.
