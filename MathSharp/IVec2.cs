@@ -72,10 +72,10 @@ namespace MathSharp
         public string ToString();
 
         // Default implementations of required methods.
-        /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.Components"/>
+        /// <inheritdoc cref="Components"/>
         TBase[] IComponents => new[] { X, Y };
 
-        /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.this[int]"/>
+        /// <inheritdoc cref="this[int]"/>
         public TBase IIndexerGet(int i)
         {
             switch (i)
@@ -89,7 +89,7 @@ namespace MathSharp
             }
         }
 
-        /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.this[int]"/>
+        /// <inheritdoc cref="this[int]"/>
         public void IIndexerSet(int i, TBase value)
         {
             switch (i)
@@ -105,7 +105,7 @@ namespace MathSharp
             }
         }
 
-        /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.Rotate(IAngle)"/>
+        /// <inheritdoc cref="Rotate(IAngle)"/>
         public TVFloat IRotate(IAngle angle)
             => new TVFloat
             {
@@ -115,37 +115,37 @@ namespace MathSharp
                 ToTFloat(Y) * ToTFloat(Math.Cos(angle.Radians))
             };
 
-        /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.Mag2"/>
+        /// <inheritdoc cref="Mag2"/>
         public TBase IMag2() => X * X + Y * Y;
 
-        /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.Mag"/>
+        /// <inheritdoc cref="Mag"/>
         public TFloat IMag() => ToTFloat(Math.Sqrt(Convert.ToDouble(Mag2())));
 
-        /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.Dot"/>
+        /// <inheritdoc cref="Dot"/>
         public TBase IDot(in TSelf other) => X * other.X + Y * other.Y;
 
-        /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.Cross2d"/>
+        /// <inheritdoc cref="Cross2d"/>
         public TBase ICross2d(in TSelf other) => X * other.Y - Y * other.X;
 
-        /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.Norm"/>
+        /// <inheritdoc cref="Norm"/>
         public TVFloat INorm() => IFDiv(Mag());
 
         /// <summary>
         /// Computes the sum of two vectors.
         /// </summary>
-        public TSelf IAdd(in IVec2<TSelf, TBase, TFloat, TVFloat> other)
+        public TSelf IAdd(in TSelf other)
             => new TSelf { X = X + other.X, Y = Y + other.Y };
 
         /// <summary>
         /// Computes the difference of two vectors.
         /// </summary>
-        public TSelf ISub(in IVec2<TSelf, TBase, TFloat, TVFloat> other)
+        public TSelf ISub(in TSelf other)
             => new TSelf { X = X - other.X, Y = Y - other.Y };
 
         /// <summary>
         /// Computes the Hadamard product of two vectors, also known as the component-wise product (<see href="https://en.wikipedia.org/wiki/Hadamard_product_(matrices)"/>).
         /// </summary>
-        public TSelf IMul(in IVec2<TSelf, TBase, TFloat, TVFloat> other)
+        public TSelf IMul(in TSelf other)
             => new TSelf { X = X * other.X, Y = Y * other.Y };
 
         /// <summary>
@@ -154,14 +154,14 @@ namespace MathSharp
         public TSelf IMul(TBase scalar)
             => new TSelf { X = X * scalar, Y = Y * scalar };
 
-        /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.IMul(TBase)"/>
+        /// <inheritdoc cref="IMul(TBase)"/>
         public TVFloat IFMul(TFloat scalar)
             => new TVFloat { X = ToTFloat(X) * scalar, Y = ToTFloat(Y) * scalar };
 
         /// <summary>
         /// Computes the Hadamar inverse product (division) of two vectors, also known as the component-wise inverse product (<see href="https://en.wikipedia.org/wiki/Hadamard_product_(matrices)"/>).
         /// </summary>
-        public TSelf IDiv(in IVec2<TSelf, TBase, TFloat, TVFloat> other)
+        public TSelf IDiv(in TSelf other)
             => new TSelf { X = X / other.X, Y = Y / other.Y };
 
         /// <summary>
@@ -170,7 +170,7 @@ namespace MathSharp
         public TSelf IDiv(TBase scalar)
             => new TSelf { X = X / scalar, Y = Y / scalar };
 
-        /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.IDiv(TBase)"/>
+        /// <inheritdoc cref="IDiv(TBase)"/>
         public TVFloat IFDiv(TFloat scalar)
             => new TVFloat { X = ToTFloat(X) / scalar, Y = ToTFloat(Y) / scalar };
 
@@ -179,7 +179,7 @@ namespace MathSharp
         /// </summary>
         public bool IEquals(in TSelf other) => X == other.X && Y == other.Y;
 
-        /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.IEquals(in TSelf)"/>
+        /// <inheritdoc cref="IEquals(in TSelf)"/>
         public static virtual bool operator ==(in TSelf lhs, in TSelf rhs) => lhs.Equals(rhs);
 
         /// <summary>
@@ -193,7 +193,7 @@ namespace MathSharp
         /// <inheritdoc cref="object.GetHashCode"/>
         public int IGetHashCode() => ((object)this).GetHashCode();
 
-        /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.ToString"/>
+        /// <inheritdoc cref="ToString"/>
         public string IToString() => $"<{X}, {Y}>";
 
         private static TFloat ToTFloat(double d) => (TFloat)Convert.ChangeType(d, typeof(TFloat));

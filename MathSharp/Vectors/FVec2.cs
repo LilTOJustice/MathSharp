@@ -1,6 +1,4 @@
-﻿using System.Security.Cryptography;
-
-namespace MathSharp
+﻿namespace MathSharp
 {
     /// <summary>
     /// A 2d vector of type double.
@@ -59,19 +57,19 @@ namespace MathSharp
         /// </summary>
         public static explicit operator Vec2(in FVec2 vec) => new Vec2((int)vec.X, (int)vec.Y);
 
-        /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.IAdd(in IVec2{TSelf, TBase, TFloat, TVFloat})"/>
+        /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.IAdd(in TSelf)"/>
         public static FVec2 operator +(in FVec2 lhs, in FVec2 rhs) => (lhs as IVec2<FVec2, double, double, FVec2>).IAdd(rhs);
 
-        /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.ISub(in IVec2{TSelf, TBase, TFloat, TVFloat})"/>
+        /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.ISub(in TSelf)"/>
         public static FVec2 operator -(in FVec2 lhs, in FVec2 rhs) => (lhs as IVec2<FVec2, double, double, FVec2>).ISub(rhs);
 
-        /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.IMul(in IVec2{TSelf, TBase, TFloat, TVFloat})"/>
+        /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.IMul(in TSelf)"/>
         public static FVec2 operator *(in FVec2 lhs, in FVec2 rhs) => (lhs as IVec2<FVec2, double, double, FVec2>).IMul(rhs);
 
         /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.IMul(TBase)"/>
         public static FVec2 operator *(in FVec2 lhs, double scalar) => (lhs as IVec2<FVec2, double, double, FVec2>).IMul(scalar);
 
-        /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.IDiv(in IVec2{TSelf, TBase, TFloat, TVFloat})"/>
+        /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.IDiv(in TSelf)"/>
         public static FVec2 operator /(in FVec2 lhs, in FVec2 rhs) => (lhs as IVec2<FVec2, double, double, FVec2>).IDiv(rhs);
 
         /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.IDiv(TBase)"/>
