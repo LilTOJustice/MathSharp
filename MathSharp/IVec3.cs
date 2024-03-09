@@ -59,14 +59,14 @@ namespace MathSharp
         public TBase Dot(in TSelf other);
 
         /// <summary>
-        /// Computes the normalized vector.
-        /// </summary>
-        public TVFloat Norm();
-
-        /// <summary>
         /// Computes the cross product between two vectors. (<see href="https://en.wikipedia.org/wiki/Cross_product"/>).
         /// </summary>
         public TSelf Cross(in TSelf other);
+
+        /// <summary>
+        /// Computes the normalized vector.
+        /// </summary>
+        public TVFloat Norm();
 
         /// <summary>
         /// Gets the string representation of the vector.
@@ -132,6 +132,9 @@ namespace MathSharp
             Z = X * other.Y - Y * other.X
         };
 
+        /// <inheritdoc cref="Norm"/>
+        public TVFloat INorm() => IFDiv(Mag());
+
         /// <summary>
         /// Computes the sum of two vectors.
         /// </summary>
@@ -180,14 +183,6 @@ namespace MathSharp
         /// Computes whether two vectors are equal.
         /// </summary>
         public bool IEquals(in TSelf other) => X == other.X && Y == other.Y && Z == other.Z;
-
-        /// <inheritdoc cref="IEquals(in TSelf)"/>
-        public static virtual bool operator ==(in TSelf lhs, in TSelf rhs) => lhs.Equals(rhs);
-
-        /// <summary>
-        /// Computes whether two vectors are not equal.
-        /// </summary>
-        public static virtual bool operator !=(in TSelf lhs, in TSelf rhs) => !lhs.Equals(rhs);
 
         /// <inheritdoc cref="object.Equals(object?)"/>
         public bool IEquals(in object? obj) => obj is TSelf other && IEquals(other);

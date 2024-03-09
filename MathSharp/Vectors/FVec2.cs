@@ -75,22 +75,22 @@
         /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.IDiv(TBase)"/>
         public static FVec2 operator /(in FVec2 lhs, double scalar) => (lhs as IVec2<FVec2, double, double, FVec2>).IDiv(scalar);
 
-        /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.operator ==(in TSelf, in TSelf)"/>
+        /// <inheritdoc cref="Equals(IVec2{FVec2, double, double, FVec2}?)"/>
         public static bool operator ==(in FVec2 lhs, in FVec2 rhs) => lhs.Equals(rhs);
 
-        /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.operator !=(in TSelf, in TSelf)"/>
+        /// <inheritdoc cref="Equals(IVec2{FVec2, double, double, FVec2}?)"/>
         public static bool operator !=(in FVec2 lhs, in FVec2 rhs) => !lhs.Equals(rhs);
 
         /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.IEquals(in TSelf)"/>
         public bool Equals(IVec2<FVec2, double, double, FVec2>? other) => (this as IVec2<FVec2, double, double, FVec2>).IEquals(other);
-
-        /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.IToString"/>
-        public override string ToString() => (this as IVec2<FVec2, double, double, FVec2>).IToString();
 
         /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.IEquals(in object?)"/>
         public override bool Equals(object? obj) => (this as IVec2<FVec2, double, double, FVec2>).IEquals(obj);
 
         /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.IGetHashCode"/>
         public override int GetHashCode() => (this as IVec2<FVec2, double, double, FVec2>).IGetHashCode();
+
+        /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.IToString"/>
+        public override string ToString() => (this as IVec2<FVec2, double, double, FVec2>).IToString();
     }
 }

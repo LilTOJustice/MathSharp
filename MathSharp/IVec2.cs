@@ -179,14 +179,6 @@ namespace MathSharp
         /// </summary>
         public bool IEquals(in TSelf other) => X == other.X && Y == other.Y;
 
-        /// <inheritdoc cref="IEquals(in TSelf)"/>
-        public static virtual bool operator ==(in TSelf lhs, in TSelf rhs) => lhs.Equals(rhs);
-
-        /// <summary>
-        /// Computes whether two vectors are not equal.
-        /// </summary>
-        public static virtual bool operator !=(in TSelf lhs, in TSelf rhs) => !lhs.Equals(rhs);
-
         /// <inheritdoc cref="object.Equals(object?)"/>
         public bool IEquals(in object? obj) => obj is TSelf other && IEquals(other);
 

@@ -7,7 +7,6 @@ namespace MathSharpDriver
     {
         static void Main(string[] args)
         {
-            Vec2 vec2 = new Vec2(1, 2);
         }
     }
 }
