@@ -127,7 +127,7 @@ namespace MathSharp
         {
             if (swizzle.SwizzleString.Length != 3)
             {
-                throw new SwizzleException("Incorrect length of swizzle string. Expected 2, got " + swizzle.SwizzleString.Length);
+                throw new SwizzleException("Incorrect length of swizzle string. Expected 3, got " + swizzle.SwizzleString.Length);
             }
 
             TSelf result = new TSelf { };
