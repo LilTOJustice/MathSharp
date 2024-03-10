@@ -3,17 +3,19 @@
     /// <summary>
     /// Interface for swizzlable types.
     /// </summary>
-    public interface ISwizzlable<TSelf>
-        where TSelf : ISwizzlable<TSelf>
+    public interface ISwizzlable<TSelf, TBase>
+        where TSelf : struct, ISwizzlable<TSelf, TBase>
     {
         /// <summary>
-        /// For implicitly converting a swizzle to the implementing type. i.e. <c>Vec2 v = vec3.Swizzle("yz");</c>
+        /// For implicitly converting a swizzle to the implementing type. i.e. <c>Vec2 v = vec3["yz"];</c>
         /// </summary>
-        public static abstract implicit operator TSelf(Swizzle<TSelf> swizzler);
+        public static abstract implicit operator TSelf(Swizzle<TBase> swizzler);
 
         /// <summary>
-        /// For creating the swizzle object. i.e. <c>vec3.Swizzle("yz")</c>
+        /// Used to perform a swizzle. i.e. <c>vec3["yz"] = vec3["xz"];</c>
         /// </summary>
-        public abstract Swizzle<TSelf> Swizzle(string swizzle);
+        public Swizzle<TBase> this[string swizzle] { get; set; }
+
+        //public TSelf this[string swizzle] { set; }
     }
 }

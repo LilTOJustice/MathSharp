@@ -10,14 +10,14 @@ namespace MathSharp
         where TSelf :
         struct,
         IVec3<TSelf, TBase, TFloat, TVFloat>,
-        ISwizzlable<TSelf>,
+        ISwizzlable<TSelf, TBase>,
         IEquatable<TSelf>
         where TBase : INumber<TBase>
         where TFloat : IFloatingPoint<TFloat>
         where TVFloat :
         struct,
         IVec3<TVFloat, TFloat, TFloat, TVFloat>,
-        ISwizzlable<TVFloat>,
+        ISwizzlable<TVFloat, TFloat>,
         IEquatable<TVFloat>
     {
         /// <summary>
@@ -44,6 +44,14 @@ namespace MathSharp
         /// Indexer for the vector. 0 is the x component and so on.
         /// </summary>
         public TBase this[int i] { get; set; }
+
+        /// <summary>
+        /// For swizzling vectors. <see href="https://en.wikipedia.org/wiki/Swizzling_(computer_graphics)"/>.
+        /// I.e. Vec2 v = vec3["yz"];
+        /// </summary>
+        /// <param name="swizzle"></param>
+        /// <returns></returns>
+        public Swizzle<TBase> this[string swizzle] { get; set; }
 
         /// <summary>
         /// Computes the rotated vector by the given angle vector.
@@ -120,14 +128,51 @@ namespace MathSharp
             }
         }
 
+        /// <inheritdoc cref="this[string]"/>
+        public static Swizzle<TBase> ISwizzleGet(in TSelf self, string swizzle)
+        {
+            return new Swizzle<TBase>(self.Components, swizzle);
+        }
+
+        /// <inheritdoc cref="this[string]"/>
+        public static void ISwizzleSet(ref TSelf self, string swizzleString, Swizzle<TBase> swizzle)
+        {
+            if (swizzleString.Length > 3)
+            {
+                throw new SwizzleException(3, swizzleString.Length);
+            }
+
+            if (swizzle.SwizzleString.Length != swizzleString.Length)
+            {
+                throw new SwizzleException(swizzleString.Length, swizzle.SwizzleString.Length);
+            }
+
+            for (int i = 0; i < swizzle.SwizzleString.Length; i++)
+            {
+                self[swizzleString[i] switch
+                { 
+                    'x' => 0,
+                    'y' => 1,
+                    'z' => 2,
+                    _ => throw new SwizzleException(swizzleString[i])
+                }] = swizzle.SwizzleString[i] switch
+                {
+                    'x' => swizzle.Container[0],
+                    'y' => swizzle.Container[1],
+                    'z' => swizzle.Container[2],
+                    _ => throw new SwizzleException(swizzle.SwizzleString[i])
+                };
+            }
+        }
+
         /// <summary>
         /// Used to implicitly convert a swizzler to the implementing type.
         /// </summary>
-        public static TSelf ISwizzleToSelf(Swizzle<TSelf> swizzle)
+        public static TSelf ISwizzleToSelf(Swizzle<TBase> swizzle)
         {
             if (swizzle.SwizzleString.Length != 3)
             {
-                throw new SwizzleException("Incorrect length of swizzle string. Expected 3, got " + swizzle.SwizzleString.Length);
+                throw new SwizzleException(3, swizzle.SwizzleString.Length);
             }
 
             TSelf result = new TSelf { };
@@ -135,10 +180,10 @@ namespace MathSharp
             {
                 result[i] = swizzle.SwizzleString[i] switch
                 {
-                    'x' => swizzle.Container.X,
-                    'y' => swizzle.Container.Y,
-                    'z' => swizzle.Container.Z,
-                    _ => throw new SwizzleException($"Unexpected swizzle value: {swizzle.SwizzleString[i]}")
+                    'x' => swizzle.Container[0],
+                    'y' => swizzle.Container[1],
+                    'z' => swizzle.Container[2],
+                    _ => throw new SwizzleException(swizzle.SwizzleString[i])
                 };
             }
 
@@ -148,9 +193,9 @@ namespace MathSharp
         /// <summary>
         /// Creates a swizzle object that can be used to swizzle vectors. <see href="https://en.wikipedia.org/wiki/Swizzling_(computer_graphics)"/>.
         /// </summary>
-        public static Swizzle<TSelf> ISwizzle(in TSelf self, string swizzle)
+        public static Swizzle<TBase> ISwizzle(in TSelf self, string swizzle)
         {
-            return new Swizzle<TSelf>(self, swizzle);
+            return new Swizzle<TBase>(self.Components, swizzle);
         }
 
         /// <inheritdoc cref="Rotate(in AVec3)"/>

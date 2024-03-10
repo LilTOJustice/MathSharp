@@ -6,14 +6,13 @@
     /// Vec3 v3 = v2.Swizzle("xyx");
     /// v2.Swizzle("yx") = v3.Swizzle("yz");
     /// </summary>
-    /// <typeparam name="T"></typeparam>
+    /// <typeparam name="T">Type stored in the swizzlable.</typeparam>
     public class Swizzle<T>
-        where T : ISwizzlable<T>
     {
         /// <summary>
         /// Swizzlable container.
         /// </summary>
-        public T Container { get; set; }
+        public T[] Container { get; set; }
 
         /// <summary>
         /// String representing the swizzle.
@@ -23,7 +22,7 @@
         /// <summary>
         /// Constructs a new swizzle object.
         /// </summary>
-        public Swizzle(T container, string swizzleString)
+        public Swizzle(T[] container, string swizzleString)
         {
             Container = container;
             SwizzleString = swizzleString;

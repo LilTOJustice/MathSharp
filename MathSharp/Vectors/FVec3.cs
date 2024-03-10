@@ -3,7 +3,7 @@
     /// <summary>
     /// A 3d vector of type double.
     /// </summary>
-    public struct FVec3 : IVec3<FVec3, double, double, FVec3>, ISwizzlable<FVec3>, IEquatable<FVec3>
+    public struct FVec3 : IVec3<FVec3, double, double, FVec3>, ISwizzlable<FVec3, double>, IEquatable<FVec3>
     {
         /// <inheritdoc cref="IVec3{TSelf, TBase, TFloat, TVFloat}.X"/>
         public double X { get; set; }
@@ -23,11 +23,15 @@
             set => IVec3<FVec3, double, double, FVec3>.IIndexerSet(ref this, i, value);
         }
 
-        /// <inheritdoc cref="IVec3{TSelf, TBase, TFloat, TVFloat}.ISwizzleToSelf"/>
-        public static implicit operator FVec3(Swizzle<FVec3> swizzler) => IVec3<FVec3, double, double, FVec3>.ISwizzleToSelf(swizzler);
+        /// <inheritdoc cref="ISwizzlable{TSelf, TBase}.this[string]"/>
+        public Swizzle<double> this[string swizzle]
+        {
+            get => IVec3<FVec3, double, double, FVec3>.ISwizzleGet(this, swizzle);
+            set => IVec3<FVec3, double, double, FVec3>.ISwizzleSet(ref this, swizzle, value);
+        }
 
-        /// <inheritdoc cref="IVec3{TSelf, TBase, TFloat, TVFloat}.ISwizzle"/>
-        public Swizzle<FVec3> Swizzle(string swizzle) => IVec3<FVec3, double, double, FVec3>.ISwizzle(this, swizzle);
+        /// <inheritdoc cref="IVec3{TSelf, TBase, TFloat, TVFloat}.ISwizzleToSelf"/>
+        public static implicit operator FVec3(Swizzle<double> swizzler) => IVec3<FVec3, double, double, FVec3>.ISwizzleToSelf(swizzler);
 
         /// <summary>
         /// Constructs a new 3d vector.
