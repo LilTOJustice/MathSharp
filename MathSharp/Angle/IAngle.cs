@@ -1,10 +1,13 @@
-﻿namespace MathSharp
+﻿using System.Numerics;
+
+namespace MathSharp
 {
     /// <summary>
     /// Interface for representing an angle in degrees or radians.
     /// <see cref="Degree"/> or <see cref="Radian"/> should be used to represent an angle.
     /// </summary>
-    public interface IAngle
+    public interface IAngle<TSelf>
+        where TSelf : IFloatingPoint<TSelf>
     {
         /// <summary>
         /// Radians representation of the angle.
