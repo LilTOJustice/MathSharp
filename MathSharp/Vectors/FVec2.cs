@@ -64,22 +64,22 @@
         public static explicit operator Vec2(in FVec2 vec) => new Vec2((int)vec.X, (int)vec.Y);
 
         /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.IAdd(in TSelf, in TSelf)"/>
-        public static FVec2 operator +(in FVec2 lhs, in FVec2 rhs) => (lhs as IVec2<FVec2, double, double, FVec2>).IAdd(rhs);
+        public static FVec2 operator +(in FVec2 lhs, in FVec2 rhs) => IVec2<FVec2, double, double, FVec2>.IAdd(lhs, rhs);
 
         /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.ISub(in TSelf, in TSelf)"/>
-        public static FVec2 operator -(in FVec2 lhs, in FVec2 rhs) => (lhs as IVec2<FVec2, double, double, FVec2>).ISub(rhs);
+        public static FVec2 operator -(in FVec2 lhs, in FVec2 rhs) => IVec2<FVec2, double, double, FVec2>.ISub(lhs, rhs);
 
         /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.IMul(in TSelf, in TSelf)"/>
-        public static FVec2 operator *(in FVec2 lhs, in FVec2 rhs) => (lhs as IVec2<FVec2, double, double, FVec2>).IMul(rhs);
+        public static FVec2 operator *(in FVec2 lhs, in FVec2 rhs) => IVec2<FVec2, double, double, FVec2>.IMul(lhs, rhs);
 
         /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.IMul(in TSelf, TBase)"/>
-        public static FVec2 operator *(in FVec2 lhs, double scalar) => (lhs as IVec2<FVec2, double, double, FVec2>).IMul(scalar);
+        public static FVec2 operator *(in FVec2 lhs, double scalar) => IVec2<FVec2, double, double, FVec2>.IMul(lhs, scalar);
 
         /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.IDiv(in TSelf, in TSelf)"/>
-        public static FVec2 operator /(in FVec2 lhs, in FVec2 rhs) => (lhs as IVec2<FVec2, double, double, FVec2>).IDiv(rhs);
+        public static FVec2 operator /(in FVec2 lhs, in FVec2 rhs) => IVec2<FVec2, double, double, FVec2>.IDiv(lhs, rhs);
 
         /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.IDiv(in TSelf, TBase)"/>
-        public static FVec2 operator /(in FVec2 lhs, double scalar) => (lhs as IVec2<FVec2, double, double, FVec2>).IDiv(scalar);
+        public static FVec2 operator /(in FVec2 lhs, double scalar) => IVec2<FVec2, double, double, FVec2>.IDiv(lhs, scalar);
 
         /// <inheritdoc cref="Equals(FVec2)"/>
         public static bool operator ==(in FVec2 lhs, in FVec2 rhs) => lhs.Equals(rhs);
