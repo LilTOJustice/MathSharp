@@ -10,16 +10,18 @@ namespace MathSharp
     /// <typeparam name="TFloat">Type used for forced float situations (such as <see cref="Mag"/>). Must be of type <see cref="IFloatingPoint{TSelf}"/>.</typeparam>
     /// <typeparam name="TVFloat">Type used for forced vector float situations (such as <see cref="Norm"/>). Must be of type <see cref="IVec2{TSelf, TBase, TFloat, TVFloat}"/>.</typeparam>
     public interface IVec2<TSelf, TBase, TFloat, TVFloat>
-        where TSelf : struct,
-            IVec2<TSelf, TBase, TFloat, TVFloat>,
-            ISwizzlable<TSelf>,
-            IEquatable<TSelf>
+        where TSelf :
+        struct,
+        IVec2<TSelf, TBase, TFloat, TVFloat>,
+        ISwizzlable<TSelf>,
+        IEquatable<TSelf>
         where TBase : INumber<TBase>
         where TFloat : IFloatingPoint<TFloat>
-        where TVFloat : struct,
-            IVec2<TVFloat, TFloat, TFloat, TVFloat>,
-            ISwizzlable<TVFloat>,
-            IEquatable<TVFloat>
+        where TVFloat :
+        struct,
+        IVec2<TVFloat, TFloat, TFloat, TVFloat>,
+        ISwizzlable<TVFloat>,
+        IEquatable<TVFloat>
     {
         /// <summary>
         /// The x component of the vector.
@@ -40,9 +42,6 @@ namespace MathSharp
         /// Indexer for the vector. 0 is the x component and so on.
         /// </summary>
         public TBase this[int i] { get; set; }
-
-        /// <inheritdoc cref="ISwizzlable{TSelf}.Swizzle(string)"/>
-        public Swizzle<TSelf> Swizzle(string swizzle);
 
         /// <summary>
         /// Computes the rotated vector by the given angle.
