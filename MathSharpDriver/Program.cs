@@ -4,7 +4,7 @@ namespace MathSharpDriver
 {
     internal class Program
     {
-        static unsafe void Main(string[] args)
+        static void Main(string[] args)
         {
             FVec2 fVec2 = new FVec2(1, 2);
             fVec2[0] = 3;
