@@ -33,6 +33,9 @@
         /// <inheritdoc cref="IVec3{TSelf, TBase, TFloat, TVFloat}.ISwizzleToSelf"/>
         public static implicit operator FVec3(Swizzle<double> swizzler) => IVec3<FVec3, double, double, FVec3>.ISwizzleToSelf(swizzler);
 
+        /// <inheritdoc cref="IVec3{TSelf, TBase, TFloat, TVFloat}.ISelfToSwizzle(in TSelf)"/>
+        public static implicit operator Swizzle<double>(in FVec3 vec) => IVec3<FVec3, double, double, FVec3>.ISelfToSwizzle(vec);
+
         /// <summary>
         /// Constructs a new 3d vector.
         /// </summary>

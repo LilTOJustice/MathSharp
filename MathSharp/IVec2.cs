@@ -154,9 +154,7 @@ namespace MathSharp
             }
         }
 
-        /// <summary>
-        /// Used to implicitly convert a swizzler to the implementing type.
-        /// </summary>
+        /// <inheritdoc cref="ISwizzlable{TSelf, TBase}.implicit operator TSelf"/>
         public static TSelf ISwizzleToSelf(Swizzle<TBase> swizzle)
         {
             if (swizzle.SwizzleString.Length != 2)
@@ -176,6 +174,12 @@ namespace MathSharp
             }
 
             return result;
+        }
+
+        /// <inheritdoc cref="ISwizzlable{TSelf, TBase}.implicit operator Swizzle{TBase}"/>
+        public static Swizzle<TBase> ISelfToSwizzle(in TSelf self)
+        {
+            return new Swizzle<TBase>(self.Components, "xy");
         }
 
         /// <inheritdoc cref="Rotate(IAngle)"/>

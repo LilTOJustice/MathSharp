@@ -11,7 +11,7 @@ namespace MathSharpDriver
             fVec2 = fVec2["yx"];
             Console.WriteLine(fVec2);
             FVec2 other = new FVec2(4, 5);
-            fVec2["yx"] = other["xy"];
+            fVec2["yx"] = other;
             Console.WriteLine(fVec2);
         }
     }

@@ -31,6 +31,9 @@
         /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.ISwizzleToSelf"/>
         public static implicit operator Vec2(Swizzle<int> swizzler) => IVec2<Vec2, int, double, FVec2>.ISwizzleToSelf(swizzler);
 
+        /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.ISelfToSwizzle(in TSelf)"/>
+        public static implicit operator Swizzle<int>(in Vec2 vec) => IVec2<Vec2, int, double, FVec2>.ISelfToSwizzle(vec);
+
         /// <inheritdoc cref="FVec2(double, double)"/>
         public Vec2(int x, int y) { X = x; Y = y; }
 
