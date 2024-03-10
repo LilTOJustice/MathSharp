@@ -6,11 +6,19 @@ namespace MathSharp
     /// <typeparam name="TBase">Base type of the vector. Must be of type <see cref="INumber{TSelf}"/>.</typeparam>
     /// <typeparam name="TFloat">Type used for forced float situations (such as <see cref="Mag"/>). Must be of type <see cref="IFloatingPoint{TSelf}"/>.</typeparam>
     /// <typeparam name="TVFloat">Type used for forced vector float situations (such as <see cref="Norm"/>). Must be of type <see cref="IVec3{TSelf, TBase, TFloat, TVFloat}"/>.</typeparam>
-    public interface IVec3<TSelf, TBase, TFloat, TVFloat> : IEquatable<IVec3<TSelf, TBase, TFloat, TVFloat>>
-        where TSelf : IVec3<TSelf, TBase, TFloat, TVFloat>, new()
+    public interface IVec3<TSelf, TBase, TFloat, TVFloat>
+        where TSelf :
+        struct,
+        IVec3<TSelf, TBase, TFloat, TVFloat>,
+        ISwizzlable<TSelf>,
+        IEquatable<TSelf>
         where TBase : INumber<TBase>
         where TFloat : IFloatingPoint<TFloat>
-        where TVFloat : IVec3<TVFloat, TFloat, TFloat, TVFloat>, new()
+        where TVFloat :
+        struct,
+        IVec3<TVFloat, TFloat, TFloat, TVFloat>,
+        ISwizzlable<TVFloat>,
+        IEquatable<TVFloat>
     {
         /// <summary>
         /// The x component of the vector.
@@ -75,123 +83,156 @@ namespace MathSharp
 
         // Default implementations of required methods.
         /// <inheritdoc cref="Components"/>
-        TBase[] IComponents => new[] { X, Y, Z };
+        public static TBase[] IComponents(in TSelf self) => new[] { self.X, self.Y, self.Z };
 
         /// <inheritdoc cref="this[int]"/>
-        public TBase IIndexerGet(int i)
+        public static TBase IIndexerGet(in TSelf self, int i)
         {
             switch (i)
             {
                 case 0:
-                    return X;
+                    return self.X;
                 case 1:
-                    return Y;
+                    return self.Y;
                 case 2:
-                    return Z;
+                    return self.Z;
                 default:
                     throw new IndexOutOfRangeException();
             }
         }
 
         /// <inheritdoc cref="this[int]"/>
-        public void IIndexerSet(int i, TBase value)
+        public static void IIndexerSet(ref TSelf self, int i, TBase value)
         {
             switch (i)
             {
                 case 0:
-                    X = value;
+                    self.X = value;
                     break;
                 case 1:
-                    Y = value;
+                    self.Y = value;
                     break;
                 case 2:
-                    Z = value;
+                    self.Z = value;
                     break;
                 default:
                     throw new IndexOutOfRangeException();
             }
+        }
+
+        /// <summary>
+        /// Used to implicitly convert a swizzler to the implementing type.
+        /// </summary>
+        public static TSelf ISwizzleToSelf(Swizzle<TSelf> swizzle)
+        {
+            if (swizzle.SwizzleString.Length != 3)
+            {
+                throw new SwizzleException("Incorrect length of swizzle string. Expected 2, got " + swizzle.SwizzleString.Length);
+            }
+
+            TSelf result = new TSelf { };
+            for (int i = 0; i < swizzle.SwizzleString.Length; i++)
+            {
+                result[i] = swizzle.SwizzleString[i] switch
+                {
+                    'x' => swizzle.Container.X,
+                    'y' => swizzle.Container.Y,
+                    'z' => swizzle.Container.Z,
+                    _ => throw new SwizzleException($"Unexpected swizzle value: {swizzle.SwizzleString[i]}")
+                };
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Creates a swizzle object that can be used to swizzle vectors. <see href="https://en.wikipedia.org/wiki/Swizzling_(computer_graphics)"/>.
+        /// </summary>
+        public static Swizzle<TSelf> ISwizzle(in TSelf self, string swizzle)
+        {
+            return new Swizzle<TSelf>(self, swizzle);
         }
 
         /// <inheritdoc cref="Rotate(in AVec3)"/>
-        public TVFloat IRotate(in AVec3 angle) => throw new NotImplementedException();
+        public static TVFloat IRotate(in TSelf self, in AVec3 angle) => throw new NotImplementedException();
 
         /// <inheritdoc cref="Mag2"/>
-        public TBase IMag2() => X * X + Y * Y + Z * Z;
+        public static TBase IMag2(in TSelf self) => self.X * self.X + self.Y * self.Y + self.Z * self.Z;
 
         /// <inheritdoc cref="Mag"/>
-        public TFloat IMag() => ToTFloat(Math.Sqrt(Convert.ToDouble(Mag2())));
+        public static TFloat IMag(in TSelf self) => ToTFloat(Math.Sqrt(Convert.ToDouble(self.Mag2())));
 
         /// <inheritdoc cref="Dot"/>
-        public TBase IDot(in TSelf other) => X * other.X + Y * other.Y + Z * other.Z;
+        public static TBase IDot(in TSelf self, in TSelf other) => self.X * other.X + self.Y * other.Y + self.Z * other.Z;
 
         /// <inheritdoc cref="Cross(in TSelf)"/>
-        public TSelf ICross(in TSelf other) => new TSelf
+        public static TSelf ICross(in TSelf self, in TSelf other) => new TSelf
         {
-            X = Y * other.Z - Z * other.Y,
-            Y = Z * other.X - X * other.Z,
-            Z = X * other.Y - Y * other.X
+            X = self.Y * other.Z - self.Z * other.Y,
+            Y = self.Z * other.X - self.X * other.Z,
+            Z = self.X * other.Y - self.Y * other.X
         };
 
         /// <inheritdoc cref="Norm"/>
-        public TVFloat INorm() => IFDiv(Mag());
+        public static TVFloat INorm(in TSelf self) => IFDiv(self, self.Mag());
 
         /// <summary>
         /// Computes the sum of two vectors.
         /// </summary>
-        public TSelf IAdd(in TSelf other)
-            => new TSelf { X = X + other.X, Y = Y + other.Y, Z = Z + other.Z };
+        public static TSelf IAdd(in TSelf self, in TSelf other)
+            => new TSelf { X = self.X + other.X, Y = self.Y + other.Y, Z = self.Z + other.Z };
 
         /// <summary>
         /// Computes the difference of two vectors.
         /// </summary>
-        public TSelf ISub(in TSelf other)
-            => new TSelf { X = X - other.X, Y = Y - other.Y, Z = Z - other.Y };
+        public static TSelf ISub(in TSelf self, in TSelf other)
+            => new TSelf { X = self.X - other.X, Y = self.Y - other.Y, Z = self.Z - other.Y };
 
         /// <summary>
         /// Computes the Hadamard product of two vectors, also known as the component-wise product (<see href="https://en.wikipedia.org/wiki/Hadamard_product_(matrices)"/>).
         /// </summary>
-        public TSelf IMul(in TSelf other)
-            => new TSelf { X = X * other.X, Y = Y * other.Y, Z = Z * other.Z };
+        public static TSelf IMul(in TSelf self, in TSelf other)
+            => new TSelf { X = self.X * other.X, Y = self.Y * other.Y, Z = self.Z * other.Z };
 
         /// <summary>
         /// Computes the product of a vector and a scalar.
         /// </summary>
-        public TSelf IMul(TBase scalar)
-            => new TSelf { X = X * scalar, Y = Y * scalar, Z = Z * scalar };
+        public static TSelf IMul(in TSelf self, TBase scalar)
+            => new TSelf { X = self.X * scalar, Y = self.Y * scalar, Z = self.Z * scalar };
 
-        /// <inheritdoc cref="IMul(TBase)"/>
-        public TVFloat IFMul(TFloat scalar)
-            => new TVFloat { X = ToTFloat(X) * scalar, Y = ToTFloat(Y) * scalar, Z = ToTFloat(Z) * scalar };
+        /// <inheritdoc cref="IMul(in TSelf, TBase)"/>
+        public static TVFloat IFMul(in TSelf self, TFloat scalar)
+            => new TVFloat { X = ToTFloat(self.X) * scalar, Y = ToTFloat(self.Y) * scalar, Z = ToTFloat(self.Z) * scalar };
 
         /// <summary>
         /// Computes the Hadamar inverse product (division) of two vectors, also known as the component-wise inverse product (<see href="https://en.wikipedia.org/wiki/Hadamard_product_(matrices)"/>).
         /// </summary>
-        public TSelf IDiv(in TSelf other)
-            => new TSelf { X = X / other.X, Y = Y / other.Y, Z = Z / other.Z };
+        public static TSelf IDiv(in TSelf self, in TSelf other)
+            => new TSelf { X = self.X / other.X, Y = self.Y / other.Y, Z = self.Z / other.Z };
 
         /// <summary>
         /// Computes the division of a vector by a scalar.
         /// </summary>
-        public TSelf IDiv(TBase scalar)
-            => new TSelf { X = X / scalar, Y = Y / scalar, Z = Z / scalar };
+        public static TSelf IDiv(in TSelf self, TBase scalar)
+            => new TSelf { X = self.X / scalar, Y = self.Y / scalar, Z = self.Z / scalar };
 
-        /// <inheritdoc cref="IDiv(TBase)"/>
-        public TVFloat IFDiv(TFloat scalar)
-            => new TVFloat { X = ToTFloat(X) / scalar, Y = ToTFloat(Y) / scalar, Z = ToTFloat(Z) / scalar };
+        /// <inheritdoc cref="IDiv(in TSelf, TBase)"/>
+        public static TVFloat IFDiv(in TSelf self, TFloat scalar)
+            => new TVFloat { X = ToTFloat(self.X) / scalar, Y = ToTFloat(self.Y) / scalar, Z = ToTFloat(self.Z) / scalar };
 
         /// <summary>
         /// Computes whether two vectors are equal.
         /// </summary>
-        public bool IEquals(in TSelf other) => X == other.X && Y == other.Y && Z == other.Z;
+        public static bool IEquals(in TSelf self, in TSelf other) => self.X == other.X && self.Y == other.Y && self.Z == other.Z;
 
         /// <inheritdoc cref="object.Equals(object?)"/>
-        public bool IEquals(in object? obj) => obj is TSelf other && IEquals(other);
+        public static bool IEquals(in TSelf self, in object? obj) => obj is TSelf other && IEquals(self, other);
 
         /// <inheritdoc cref="object.GetHashCode"/>
-        public int IGetHashCode() => ((object)this).GetHashCode();
+        public static int IGetHashCode(in TSelf self) => ((object)self).GetHashCode();
 
         /// <inheritdoc cref="ToString"/>
-        public string IToString() => $"<{X}, {Y}, {Z}>";
+        public static string IToString(in TSelf self) => $"<{self.X}, {self.Y}, {self.Z}>";
 
         private static TFloat ToTFloat(double d) => (TFloat)Convert.ChangeType(d, typeof(TFloat));
 

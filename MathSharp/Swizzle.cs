@@ -1,8 +1,4 @@
-﻿using System.Numerics;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
-
-namespace MathSharp
+﻿namespace MathSharp
 {
     /// <summary>
     /// Created to allow swizzling of vectors. <see href="https://en.wikipedia.org/wiki/Swizzling_(computer_graphics)"/>.

@@ -74,7 +74,6 @@ namespace MathSharp
         /// </summary>
         public TVFloat Norm();
 
-
         /// <summary>
         /// Gets the string representation of the vector.
         /// </summary>
@@ -82,7 +81,7 @@ namespace MathSharp
 
         // Default implementations of required methods.
         /// <inheritdoc cref="Components"/>
-        static TBase[] IComponents(in TSelf self) => new[] { self.X, self.Y };
+        public static TBase[] IComponents(in TSelf self) => new[] { self.X, self.Y };
 
         /// <inheritdoc cref="this[int]"/>
         public static TBase IIndexerGet(in TSelf self, int i)
