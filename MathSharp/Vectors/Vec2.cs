@@ -21,16 +21,16 @@
             set => IVec2<Vec2, int, double, FVec2>.IIndexerSet(ref this, i, value);
         }
 
-        /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.ISwizzleToSelf(Swizzle{TSelf})"/>
+        /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.ISwizzleToSelf"/>
         public static implicit operator Vec2(Swizzle<Vec2> swizzler) => IVec2<Vec2, int, double, FVec2>.ISwizzleToSelf(swizzler);
 
-        /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.ISwizzle(in TSelf, string)"/>
+        /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.ISwizzle"/>
         public Swizzle<Vec2> Swizzle(string swizzle) => IVec2<Vec2, int, double, FVec2>.ISwizzle(this, swizzle);
 
         /// <inheritdoc cref="FVec2(double, double)"/>
         public Vec2(int x, int y) { X = x; Y = y; }
 
-        /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.Rotate(IAngle)"/>
+        /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.Rotate"/>
         public FVec2 Rotate(IAngle angle) => IVec2<Vec2, int, double, FVec2>.IRotate(this, angle);
 
         /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.Mag2"/>
@@ -39,10 +39,10 @@
         /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.Mag"/>
         public double Mag() => IVec2<Vec2, int, double, FVec2>.IMag(this);
 
-        /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.Dot(in TSelf)"/>
+        /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.Dot"/>
         public int Dot(in Vec2 other) => IVec2<Vec2, int, double, FVec2>.IDot(this, other);
 
-        /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.Cross2d(in TSelf)"/>
+        /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.Cross2d"/>
         public int Cross2d(in Vec2 rhs) => IVec2<Vec2, int, double, FVec2>.ICross2d(this, rhs);
 
         /// <inheritdoc cref="FVec2.Norm"/>
@@ -56,10 +56,10 @@
         /// </summary>
         public static implicit operator FVec2(in Vec2 vec) => new FVec2(vec.X, vec.Y);
 
-        /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.IAdd(in TSelf, in TSelf)"/>
+        /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.IAdd"/>
         public static Vec2 operator +(in Vec2 lhs, in Vec2 rhs) => IVec2<Vec2, int, double, FVec2>.IAdd(lhs, rhs);
 
-        /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.ISub(in TSelf, in TSelf)"/>
+        /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.ISub"/>
         public static Vec2 operator -(in Vec2 lhs, in Vec2 rhs) => IVec2<Vec2, int, double, FVec2>.ISub(lhs, rhs);
 
         /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.IMul(in TSelf, in TSelf)"/>

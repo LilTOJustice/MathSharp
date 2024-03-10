@@ -31,10 +31,10 @@
             set => IVec4<FVec4, double, double, FVec4>.IIndexerSet(ref this, i, value);
         }
 
-        /// <inheritdoc cref="IVec4{TSelf, TBase, TFloat, TVFloat}.ISwizzleToSelf(Swizzle{TSelf})"/>
+        /// <inheritdoc cref="IVec4{TSelf, TBase, TFloat, TVFloat}.ISwizzleToSelf"/>
         public static implicit operator FVec4(Swizzle<FVec4> swizzler) => IVec4<FVec4, double, double, FVec4>.ISwizzleToSelf(swizzler);
 
-        /// <inheritdoc cref="IVec4{TSelf, TBase, TFloat, TVFloat}.ISwizzle(in TSelf, string)"/>
+        /// <inheritdoc cref="IVec4{TSelf, TBase, TFloat, TVFloat}.ISwizzle"/>
         public Swizzle<FVec4> Swizzle(string swizzle) => IVec4<FVec4, double, double, FVec4>.ISwizzle(this, swizzle);
 
         /// <inheritdoc cref="IVec4{TSelf, TBase, TFloat, TVFloat}.Mag2"/>
@@ -43,7 +43,7 @@
         /// <inheritdoc cref="IVec4{TSelf, TBase, TFloat, TVFloat}.Mag"/>
         public double Mag() => IVec4<FVec4, double, double, FVec4>.IMag(this);
 
-        /// <inheritdoc cref="IVec4{TSelf, TBase, TFloat, TVFloat}.Dot(in TSelf)"/>
+        /// <inheritdoc cref="IVec4{TSelf, TBase, TFloat, TVFloat}.Dot"/>
         public double Dot(in FVec4 other) => IVec4<FVec4, double, double, FVec4>.IDot(this, other);
 
         /// <inheritdoc cref="IVec4{TSelf, TBase, TFloat, TVFloat}.Norm"/>
@@ -54,10 +54,10 @@
         /// </summary>
         public static explicit operator Vec4(in FVec4 vec) => new Vec4((int)vec.X, (int)vec.Y, (int)vec.Z, (int)vec.W);
 
-        /// <inheritdoc cref="IVec4{TSelf, TBase, TFloat, TVFloat}.IAdd(in TSelf, in TSelf)"/>
+        /// <inheritdoc cref="IVec4{TSelf, TBase, TFloat, TVFloat}.IAdd"/>
         public static FVec4 operator +(in FVec4 lhs, in FVec4 rhs) => IVec4<FVec4, double, double, FVec4>.IAdd(lhs, rhs);
 
-        /// <inheritdoc cref="IVec4{TSelf, TBase, TFloat, TVFloat}.ISub(in TSelf, in TSelf)"/>
+        /// <inheritdoc cref="IVec4{TSelf, TBase, TFloat, TVFloat}.ISub"/>
         public static FVec4 operator -(in FVec4 lhs, in FVec4 rhs) => IVec4<FVec4, double, double, FVec4>.ISub(lhs, rhs);
 
         /// <inheritdoc cref="IVec4{TSelf, TBase, TFloat, TVFloat}.IMul(in TSelf, in TSelf)"/>

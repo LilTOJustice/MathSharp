@@ -32,10 +32,10 @@
             set => IVec4<Vec4, int, double, FVec4>.IIndexerSet(ref this, i, value);
         }
 
-        /// <inheritdoc cref="IVec4{TSelf, TBase, TFloat, TVFloat}.ISwizzleToSelf(Swizzle{TSelf})"/>
+        /// <inheritdoc cref="IVec4{TSelf, TBase, TFloat, TVFloat}.ISwizzleToSelf"/>
         public static implicit operator Vec4(Swizzle<Vec4> swizzler) => IVec4<Vec4, int, double, FVec4>.ISwizzleToSelf(swizzler);
 
-        /// <inheritdoc cref="IVec4{TSelf, TBase, TFloat, TVFloat}.ISwizzle(in TSelf, string)"/>
+        /// <inheritdoc cref="IVec4{TSelf, TBase, TFloat, TVFloat}.ISwizzle"/>
         public Swizzle<Vec4> Swizzle(string swizzle) => IVec4<Vec4, int, double, FVec4>.ISwizzle(this, swizzle);
 
         /// <inheritdoc cref="IVec4{TSelf, TBase, TFloat, TVFloat}.Mag2"/>
@@ -44,7 +44,7 @@
         /// <inheritdoc cref="IVec4{TSelf, TBase, TFloat, TVFloat}.Mag"/>
         public double Mag() => IVec4<Vec4, int, double, FVec4>.IMag(this);
 
-        /// <inheritdoc cref="IVec4{TSelf, TBase, TFloat, TVFloat}.Dot(in TSelf)"/>
+        /// <inheritdoc cref="IVec4{TSelf, TBase, TFloat, TVFloat}.Dot"/>
         public int Dot(in Vec4 other) => IVec4<Vec4, int, double, FVec4>.IDot(this, other);
 
         /// <inheritdoc cref="IVec4{TSelf, TBase, TFloat, TVFloat}.Norm"/>
