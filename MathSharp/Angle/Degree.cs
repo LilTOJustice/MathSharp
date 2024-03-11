@@ -239,7 +239,6 @@ namespace MathSharp
         static bool INumberBase<Degree>.TryConvertToTruncating<TOther>(Degree value, out TOther result) => throw new NotImplementedException();
 
         /// <inheritdoc/>
-        where TSelf : IFloatingPoint<TSelf>
         public static bool operator >(Degree left, Degree right) => left.Degrees > right.Degrees;
 
         /// <inheritdoc/>
