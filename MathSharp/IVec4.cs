@@ -20,6 +20,14 @@ namespace MathSharp
         ISwizzlable<TVFloat, TFloat>,
         IEquatable<TVFloat>
     {
+        private static Dictionary<char, int> swizzleDict = new Dictionary<char, int>
+        {
+            { 'x', 0 },
+            { 'y', 1 },
+            { 'z', 2 },
+            { 'w', 3 }
+        };
+
         /// <summary>
         /// The x component of the vector.
         /// </summary>
@@ -138,8 +146,13 @@ namespace MathSharp
         }
 
         /// <inheritdoc cref="this[string]"/>
-        public static void ISwizzleSet(ref TSelf self, string swizzleString, Swizzle<TBase> swizzle)
+        public static void ISwizzleSet(
+            ref TSelf self,
+            string swizzleString,
+            Swizzle<TBase> swizzle,
+            Dictionary<char, int>? swizzleIndicesOverride = null)
         {
+            Dictionary<char, int> swizzleIndices = swizzleIndicesOverride ?? swizzleDict;
             if (swizzleString.Length > 4)
             {
                 throw new SwizzleException(4, swizzleString.Length);
@@ -152,27 +165,23 @@ namespace MathSharp
 
             for (int i = 0; i < swizzle.SwizzleString.Length; i++)
             {
-                self[swizzleString[i] switch
+                try
                 {
-                    'x' => 0,
-                    'y' => 1,
-                    'z' => 2,
-                    'w' => 3,
-                    _ => throw new SwizzleException(swizzleString[i])
-                }] = swizzle.SwizzleString[i] switch
+                    self[swizzleIndices[swizzleString[i]]] = swizzle.Container[swizzleIndices[swizzle.SwizzleString[i]]];
+                }
+                catch (KeyNotFoundException)
                 {
-                    'x' => swizzle.Container[0],
-                    'y' => swizzle.Container[1],
-                    'z' => swizzle.Container[2],
-                    'w' => swizzle.Container[3],
-                    _ => throw new SwizzleException(swizzle.SwizzleString[i])
-                };
+                    throw new SwizzleException(swizzleString[i]);
+                }
             }
         }
 
         /// <inheritdoc cref="ISwizzlable{TSelf, TBase}.implicit operator TSelf(Swizzle{TBase})"/>
-        public static TSelf ISwizzleToSelf(Swizzle<TBase> swizzle)
+        public static TSelf ISwizzleToSelf(
+            Swizzle<TBase> swizzle,
+            Dictionary<char, int>? swizzleIndicesOverride = null)
         {
+            Dictionary<char, int> swizzleIndices = swizzleIndicesOverride ?? swizzleDict;
             if (swizzle.SwizzleString.Length != 4)
             {
                 throw new SwizzleException(4, swizzle.SwizzleString.Length);
@@ -181,23 +190,23 @@ namespace MathSharp
             TSelf result = new TSelf { };
             for (int i = 0; i < swizzle.SwizzleString.Length; i++)
             {
-                result[i] = swizzle.SwizzleString[i] switch
+                try
                 {
-                    'x' => swizzle.Container[0],
-                    'y' => swizzle.Container[1],
-                    'z' => swizzle.Container[2],
-                    'w' => swizzle.Container[3],
-                    _ => throw new SwizzleException(swizzle.SwizzleString[i])
-                };
+                    result[i] = swizzle.Container[swizzleIndices[swizzle.SwizzleString[i]]];
+                }
+                catch (KeyNotFoundException)
+                {
+                    throw new SwizzleException(swizzle.SwizzleString[i]);
+                }
             }
 
             return result;
         }
 
         /// <inheritdoc cref="ISwizzlable{TSelf, TBase}.implicit operator Swizzle{TBase}"/>
-        public static Swizzle<TBase> ISelfToSwizzle(in TSelf self)
+        public static Swizzle<TBase> ISelfToSwizzle(in TSelf self, string fullSwizzle)
         {
-            return new Swizzle<TBase>(self.Components, "xyzw");
+            return new Swizzle<TBase>(self.Components, fullSwizzle);
         }
 
         /// <summary>

@@ -41,8 +41,8 @@
         /// <inheritdoc cref="IVec4{TSelf, TBase, TFloat, TVFloat}.ISwizzleToSelf"/>
         public static implicit operator FVec4(Swizzle<double> swizzler) => IVec4<FVec4, double, double, FVec4>.ISwizzleToSelf(swizzler);
 
-        /// <inheritdoc cref="IVec4{TSelf, TBase, TFloat, TVFloat}.ISelfToSwizzle(in TSelf)"/>
-        public static implicit operator Swizzle<double> (in FVec4 vec) => IVec4<FVec4, double, double, FVec4>.ISelfToSwizzle(vec);
+        /// <inheritdoc cref="IVec4{TSelf, TBase, TFloat, TVFloat}.ISelfToSwizzle(in TSelf, string)"/>
+        public static implicit operator Swizzle<double> (in FVec4 vec) => IVec4<FVec4, double, double, FVec4>.ISelfToSwizzle(vec, "xyzw");
 
         /// <inheritdoc cref="IVec4{TSelf, TBase, TFloat, TVFloat}.Mag2"/>
         public double Mag2() => IVec4<FVec4, double, double, FVec4>.IMag2(this);

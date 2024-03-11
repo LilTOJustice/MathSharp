@@ -12,17 +12,17 @@
         /// <summary>
         /// Swizzlable container.
         /// </summary>
-        public T[] Container { get; set; }
+        internal T[] Container { get; set; }
 
         /// <summary>
         /// String representing the swizzle.
         /// </summary>
-        public string SwizzleString { get; set; }
+        internal string SwizzleString { get; set; }
 
         /// <summary>
         /// Constructs a new swizzle object.
         /// </summary>
-        public Swizzle(T[] container, string swizzleString)
+        internal Swizzle(T[] container, string swizzleString)
         {
             Container = container;
             SwizzleString = swizzleString;
