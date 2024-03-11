@@ -7,12 +7,12 @@ namespace MathSharp
     /// <summary>
     /// Degree representation of an angle.
     /// </summary>
-    public struct Degree : IAngle<Degree>, IFloatingPoint<Degree>
+    public struct Degree : IAngle, IFloatingPoint<Degree>
     {
-        /// <inheritdoc cref="IAngle{TSelf}.Radians"/>
+        /// <inheritdoc cref="IAngle.Radians"/>
         public double Radians => Math.PI * Degrees / 180;
 
-        /// <inheritdoc cref="IAngle{TSelf}.Degrees"/>
+        /// <inheritdoc cref="IAngle.Degrees"/>
         public double Degrees { get; private set; }
 
         /// <summary>
@@ -239,6 +239,7 @@ namespace MathSharp
         static bool INumberBase<Degree>.TryConvertToTruncating<TOther>(Degree value, out TOther result) => throw new NotImplementedException();
 
         /// <inheritdoc/>
+        where TSelf : IFloatingPoint<TSelf>
         public static bool operator >(Degree left, Degree right) => left.Degrees > right.Degrees;
 
         /// <inheritdoc/>
