@@ -5,6 +5,8 @@ VisualStudioVersion = 17.7.34202.233
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MathSharp", "MathSharp.csproj", "{88A702F3-A7A8-42DD-8954-2128CCF1CBDB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MathSharpDriver", "..\MathSharpDriver\MathSharpDriver.csproj", "{ACA86ABA-CFAB-4DE2-BB9D-DB6EE6DA0440}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{88A702F3-A7A8-42DD-8954-2128CCF1CBDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{88A702F3-A7A8-42DD-8954-2128CCF1CBDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{88A702F3-A7A8-42DD-8954-2128CCF1CBDB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ACA86ABA-CFAB-4DE2-BB9D-DB6EE6DA0440}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACA86ABA-CFAB-4DE2-BB9D-DB6EE6DA0440}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACA86ABA-CFAB-4DE2-BB9D-DB6EE6DA0440}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACA86ABA-CFAB-4DE2-BB9D-DB6EE6DA0440}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
