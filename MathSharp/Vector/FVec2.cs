@@ -1,4 +1,6 @@
-﻿namespace MathSharp
+﻿using System.Security.Cryptography;
+
+namespace MathSharp
 {
     /// <summary>
     /// A 2d vector of type double.
@@ -14,6 +16,13 @@
         /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.Components"/>
         public double[] Components => IVec2<FVec2, double, double, FVec2>.IComponents(this);
 
+        /// <inheritdoc cref="ISwizzlable{TSelf, TBase}.SwizzleMap"/>
+        public static Dictionary<char, int> SwizzleMap => new Dictionary<char, int>
+        {
+            { 'x', 0 },
+            { 'y', 1 }
+        };
+
         /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.this[int]"/>
         public double this[int i]
         {
@@ -22,17 +31,17 @@
         }
 
         /// <inheritdoc cref="ISwizzlable{TSelf, TBase}.this[string]"/>
-        public Swizzle<double> this[string swizzle]
+        public double[] this[string swizzle]
         {
             get => IVec2<FVec2, double, double, FVec2>.ISwizzleGet(this, swizzle);
             set => IVec2<FVec2, double, double, FVec2>.ISwizzleSet(ref this, swizzle, value);
         }
 
         /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.ISwizzleToSelf"/>
-        public static implicit operator FVec2(Swizzle<double> swizzle) => IVec2<FVec2, double, double, FVec2>.ISwizzleToSelf(swizzle);
+        public static implicit operator FVec2(double[] swizzle) => IVec2<FVec2, double, double, FVec2>.ISwizzleToSelf(swizzle);
 
-        /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.ISelfToSwizzle(in TSelf, string)"/>
-        public static implicit operator Swizzle<double>(in FVec2 vec) => IVec2<FVec2, double, double, FVec2>.ISelfToSwizzle(vec, "xy");
+        /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.ISelfToSwizzle"/>
+        public static implicit operator double[](in FVec2 vec) => IVec2<FVec2, double, double, FVec2>.ISelfToSwizzle(vec);
 
         /// <summary>
         /// Constructs a new 2d vector.

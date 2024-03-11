@@ -20,6 +20,15 @@
         /// <inheritdoc cref="IVec4{TSelf, TBase, TFloat, TVFloat}.Components"/>
         public int[] Components => IVec4<Vec4, int, double, FVec4>.IComponents(this);
 
+        /// <inheritdoc cref="ISwizzlable{TSelf, TBase}.SwizzleMap"/>
+        public static Dictionary<char, int> SwizzleMap => new Dictionary<char, int>
+        {
+            { 'x', 0 },
+            { 'y', 1 },
+            { 'z', 2 },
+            { 'w', 3 }
+        };
+
         /// <summary>
         /// Constructs a new 4d vector.
         /// </summary>
@@ -33,17 +42,17 @@
         }
 
         /// <inheritdoc cref="ISwizzlable{TSelf, TBase}.this[string]"/>
-        public Swizzle<int> this[string swizzle]
+        public int[] this[string swizzle]
         {
             get => IVec4<Vec4, int, double, FVec4>.ISwizzleGet(this, swizzle);
             set => IVec4<Vec4, int, double, FVec4>.ISwizzleSet(ref this, swizzle, value);
         }
 
         /// <inheritdoc cref="IVec4{TSelf, TBase, TFloat, TVFloat}.ISwizzleToSelf"/>
-        public static implicit operator Vec4(Swizzle<int> swizzler) => IVec4<Vec4, int, double, FVec4>.ISwizzleToSelf(swizzler);
+        public static implicit operator Vec4(int[] swizzler) => IVec4<Vec4, int, double, FVec4>.ISwizzleToSelf(swizzler);
 
-        /// <inheritdoc cref="IVec4{TSelf, TBase, TFloat, TVFloat}.ISelfToSwizzle(in TSelf, string)"/>
-        public static implicit operator Swizzle<int>(in Vec4 vec) => IVec4<Vec4, int, double, FVec4>.ISelfToSwizzle(vec, "xyzw");
+        /// <inheritdoc cref="IVec4{TSelf, TBase, TFloat, TVFloat}.ISelfToSwizzle"/>
+        public static implicit operator int[](in Vec4 vec) => IVec4<Vec4, int, double, FVec4>.ISelfToSwizzle(vec);
 
         /// <inheritdoc cref="IVec4{TSelf, TBase, TFloat, TVFloat}.Mag2"/>
         public int Mag2() => IVec4<Vec4, int, double, FVec4>.IMag2(this);
