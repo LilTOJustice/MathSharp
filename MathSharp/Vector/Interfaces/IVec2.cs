@@ -180,13 +180,19 @@ namespace MathSharp
 
         /// <inheritdoc cref="Rotate(IAngle)"/>
         public static TVFloat IRotate(in TSelf self, IAngle angle)
-            => new TVFloat
+        {
+            TFloat cos = ToTFloat(Math.Cos(angle.Radians));
+            TFloat sin = ToTFloat(Math.Sin(angle.Radians));
+            TFloat x = ToTFloat(self.X);
+            TFloat y = ToTFloat(self.Y);
+            return new TVFloat
             {
-                X = ToTFloat(self.X) * ToTFloat(Math.Cos(angle.Radians)) -
-                ToTFloat(self.Y) * ToTFloat(Math.Sin(angle.Radians)),
-                Y = ToTFloat(self.X) * ToTFloat(Math.Sin(angle.Radians)) +
-                ToTFloat(self.Y) * ToTFloat(Math.Cos(angle.Radians))
+                X = x * cos -
+                y * sin,
+                Y = x * sin +
+                y * cos
             };
+        }
 
         /// <inheritdoc cref="Mag2"/>
         public static TBase IMag2(in TSelf self) => self.X * self.X + self.Y * self.Y;
@@ -261,8 +267,8 @@ namespace MathSharp
         /// <inheritdoc cref="ToString"/>
         public static string IToString(in TSelf self) => $"<{self.X}, {self.Y}>";
 
-        private static TFloat ToTFloat(double d) => (TFloat)Convert.ChangeType(d, typeof(TFloat));
+        private static TFloat ToTFloat(double d) => TFloat.CreateSaturating(d);
 
-        private static TFloat ToTFloat(TBase b) => (TFloat)Convert.ChangeType(b, typeof(TFloat));
+        private static TFloat ToTFloat(TBase b) => TFloat.CreateSaturating(b);
     }
 }

@@ -263,8 +263,8 @@ namespace MathSharp
         /// <inheritdoc cref="ToString"/>
         public static string IToString(in TSelf self) => $"<{self.X}, {self.Y}, {self.Z}, {self.W}>";
 
-        private static TFloat ToTFloat(double d) => (TFloat)Convert.ChangeType(d, typeof(TFloat));
+        private static TFloat ToTFloat(double d) => TFloat.CreateSaturating(d);
 
-        private static TFloat ToTFloat(TBase b) => (TFloat)Convert.ChangeType(b, typeof(TFloat));
+        private static TFloat ToTFloat(TBase b) => TFloat.CreateSaturating(b);
     }
 }
