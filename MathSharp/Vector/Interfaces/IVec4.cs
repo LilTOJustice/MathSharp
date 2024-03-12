@@ -131,11 +131,6 @@ namespace MathSharp
         /// <inheritdoc cref="this[string]"/>
         public static TBase[] ISwizzleGet(in TSelf self, string swizzle)
         {
-            if (swizzle.Length > 4)
-            {
-                throw new SwizzleException(4, swizzle.Length);
-            }
-
             TBase[] result = new TBase[swizzle.Length];
             for (int i = 0; i < swizzle.Length; i++)
             {
