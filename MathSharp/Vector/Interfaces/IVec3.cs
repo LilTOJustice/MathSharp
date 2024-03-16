@@ -218,7 +218,7 @@ namespace MathSharp
         /// Computes the difference of two vectors.
         /// </summary>
         public static TSelf ISub(in TSelf self, in TSelf other)
-            => new TSelf { X = self.X - other.X, Y = self.Y - other.Y, Z = self.Z - other.Y };
+            => new TSelf { X = self.X - other.X, Y = self.Y - other.Y, Z = self.Z - other.Z };
 
         /// <summary>
         /// Computes the Hadamard product of two vectors, also known as the component-wise product (<see href="https://en.wikipedia.org/wiki/Hadamard_product_(matrices)"/>).
