@@ -47,7 +47,7 @@
         /// <summary>
         /// Constructs a new 3d vector.
         /// </summary>
-        public RVec3(Radian x, Radian y, Radian z) { X = x; Y = y; Z = z; }
+        public RVec3(double x, double y, double z) { X = new Radian(x); Y = new Radian(y); Z = new Radian(z); }
 
         /// <inheritdoc cref="IVec3{TSelf, TBase, TFloat, TVFloat}.Rotate"/>
         public RVec3 Rotate(in RVec3 angle) => IVec3<RVec3, Radian, Radian, RVec3>.IRotate(this, angle);
@@ -70,7 +70,7 @@
         /// <summary>
         /// Converts a radian vector to a degree vector.
         /// </summary>
-        public static implicit operator DVec3(in RVec3 vec) => new DVec3(new Degree(vec.X.Degrees), new Degree(vec.Y.Degrees), new Degree(vec.Z.Degrees));
+        public static implicit operator DVec3(in RVec3 vec) => new DVec3(vec.X.Degrees, vec.Y.Degrees, vec.Z.Degrees);
 
         /// <inheritdoc cref="IVec3{TSelf, TBase, TFloat, TVFloat}.IAdd"/>
         public static RVec3 operator +(in RVec3 lhs, in RVec3 rhs) => IVec3<RVec3, Radian, Radian, RVec3>.IAdd(lhs, rhs);

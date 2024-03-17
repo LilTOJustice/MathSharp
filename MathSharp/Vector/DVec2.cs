@@ -44,7 +44,7 @@
         /// <summary>
         /// Constructs a new 2d vector.
         /// </summary>
-        public DVec2(Degree x, Degree y) { X = x; Y = y; }
+        public DVec2(double x, double y) { X = new Degree(x); Y = new Degree(y); }
 
         /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.Rotate"/>
         public DVec2 Rotate(Radian angle) => IVec2<DVec2, Degree, Degree, DVec2>.IRotate(this, angle);
@@ -70,12 +70,12 @@
         /// Computes the cross product between two vectors <see href="https://en.wikipedia.org/wiki/Cross_product"/>.
         /// </summary>
         /// <returns>A 3d vector orthogonal to the xy plane.</returns>
-        public DVec3 Cross(in DVec2 rhs) => new DVec3(new Degree(), new Degree(), Cross2d(rhs));
+        public DVec3 Cross(in DVec2 rhs) => new DVec3(0, 0, Cross2d(rhs).Degrees);
 
         /// <summary>
         /// Converts a degree vector to a radian vector.
         /// </summary>
-        public static implicit operator RVec2(in DVec2 vec) => new RVec2(new Radian(vec.X.Radians), new Radian(vec.Y.Radians));
+        public static implicit operator RVec2(in DVec2 vec) => new RVec2(vec.X.Radians, vec.Y.Radians);
 
         /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.IAdd"/>
         public static DVec2 operator +(in DVec2 lhs, in DVec2 rhs) => IVec2<DVec2, Degree, Degree, DVec2>.IAdd(lhs, rhs);

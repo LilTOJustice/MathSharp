@@ -189,8 +189,8 @@ namespace MathSharp
             {
                 X = x * cos -
                 y * sin,
-                Y = x * sin +
-                y * cos
+                Y = y * cos +
+                x * sin
             };
         }
 
