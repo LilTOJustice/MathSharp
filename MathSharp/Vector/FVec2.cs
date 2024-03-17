@@ -1,6 +1,4 @@
-﻿using System.Security.Cryptography;
-
-namespace MathSharp
+﻿namespace MathSharp
 {
     /// <summary>
     /// A 2d vector of type double.

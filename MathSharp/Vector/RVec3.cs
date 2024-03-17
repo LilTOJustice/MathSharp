@@ -1,7 +1,7 @@
 ﻿namespace MathSharp
 {
     /// <summary>
-    /// A 3d vector of radian values.
+    /// A 3d vector of type Radian.
     /// </summary>
     public struct RVec3 : IVec3<RVec3, Radian, Radian, RVec3>, ISwizzlable<RVec3, Radian>, IEquatable<RVec3>
     {

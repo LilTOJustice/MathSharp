@@ -1,7 +1,7 @@
 ﻿namespace MathSharp
 {
     /// <summary>
-    /// A 3d vector of degree values.
+    /// A 3d vector of type Degree.
     /// </summary>
     public struct DVec3 : IVec3<DVec3, Degree, Degree, DVec3>, ISwizzlable<DVec3, Degree>, IEquatable<DVec3>
     {
