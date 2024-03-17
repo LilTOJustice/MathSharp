@@ -52,7 +52,7 @@ namespace MathSharp
         /// Computes the rotated vector by the given angle vector.
         /// </summary>
         /// <returns>A new floating point vector with the result of the rotation.</returns>
-        public TVFloat Rotate(in AVec3 angle);
+        public TVFloat Rotate(in RVec3 angle);
 
         /// <summary>
         /// Computes the squared magnitude of the vector.
@@ -185,8 +185,8 @@ namespace MathSharp
             return self.Components;
         }
 
-        /// <inheritdoc cref="Rotate(in AVec3)"/>
-        public static TVFloat IRotate(in TSelf self, in AVec3 angle) => throw new NotImplementedException();
+        /// <inheritdoc cref="Rotate(in RVec3)"/>
+        public static TVFloat IRotate(in TSelf self, in RVec3 angle) => throw new NotImplementedException();
 
         /// <inheritdoc cref="Mag2"/>
         public static TBase IMag2(in TSelf self) => self.X * self.X + self.Y * self.Y + self.Z * self.Z;

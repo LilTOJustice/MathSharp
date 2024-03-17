@@ -50,7 +50,7 @@ namespace MathSharp
         /// Computes the rotated vector by the given angle.
         /// </summary>
         /// <returns>A new floating point vector with the result of the rotation.</returns>
-        public TVFloat Rotate(IAngle angle);
+        public TVFloat Rotate(Radian angle);
 
         /// <summary>
         /// Computes the squared magnitude of the vector.
@@ -178,8 +178,8 @@ namespace MathSharp
             return self.Components;
         }
 
-        /// <inheritdoc cref="Rotate(IAngle)"/>
-        public static TVFloat IRotate(in TSelf self, IAngle angle)
+        /// <inheritdoc cref="Rotate(Radian)"/>
+        public static TVFloat IRotate(in TSelf self, Radian angle)
         {
             TFloat cos = ToTFloat(Math.Cos(angle.Radians));
             TFloat sin = ToTFloat(Math.Sin(angle.Radians));

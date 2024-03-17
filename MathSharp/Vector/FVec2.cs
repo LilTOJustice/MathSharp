@@ -49,7 +49,7 @@ namespace MathSharp
         public FVec2(double x, double y) { X = x; Y = y; }
 
         /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.Rotate"/>
-        public FVec2 Rotate(IAngle angle) => IVec2<FVec2, double, double, FVec2>.IRotate(this, angle);
+        public FVec2 Rotate(Radian angle) => IVec2<FVec2, double, double, FVec2>.IRotate(this, angle);
 
         /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.Mag2"/>
         public double Mag2() => IVec2<FVec2, double, double, FVec2>.IMag2(this);
