@@ -7,12 +7,16 @@ namespace MathSharp
     /// <summary>
     /// Degree representation of an angle.
     /// </summary>
-    public struct Degree : IAngle, IFloatingPoint<Degree>
+    public struct Degree : IFloatingPoint<Degree>
     {
-        /// <inheritdoc cref="IAngle.Radians"/>
-        public double Radians => Math.PI * Degrees / 180;
+        /// <summary>
+        /// Radian representation of the value.
+        /// </summary>
+        public double Radians { get; private set; }
 
-        /// <inheritdoc cref="IAngle.Degrees"/>
+        /// <summary>
+        /// Degree representation of the value.
+        /// </summary>
         public double Degrees { get; private set; }
 
         /// <summary>
@@ -21,6 +25,7 @@ namespace MathSharp
         public Degree(double degrees)
         {
             Degrees = degrees;
+            Radians = Math.PI * degrees / 180;
         }
 
         /// <inheritdoc/>

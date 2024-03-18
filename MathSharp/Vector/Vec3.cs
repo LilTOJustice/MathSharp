@@ -50,7 +50,7 @@
         public Vec3(int x, int y, int z) { X = x; Y = y; Z = z; }
 
         /// <inheritdoc cref="IVec3{TSelf, TBase, TFloat, TVFloat}.Rotate"/>
-        public FVec3 Rotate(in AVec3 angle) => IVec3<Vec3, int, double, FVec3>.IRotate(this, angle);
+        public FVec3 Rotate(in RVec3 angle) => IVec3<Vec3, int, double, FVec3>.IRotate(this, angle);
 
         /// <inheritdoc cref="IVec3{TSelf, TBase, TFloat, TVFloat}.Mag2"/>
         public int Mag2() => IVec3<Vec3, int, double, FVec3>.IMag2(this);
