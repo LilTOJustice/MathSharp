@@ -49,10 +49,10 @@ namespace MathSharp
         public TBase[] this[string swizzle] { get; set; }
 
         /// <summary>
-        /// Computes the rotated vector by the given angle vector.
+        /// Computes the rotated vector by the given angle vector using Euler rotation <see href="https://en.wikipedia.org/wiki/Rotation_matrix#General_3D_rotations"/>.
         /// </summary>
         /// <returns>A new floating point vector with the result of the rotation.</returns>
-        public TVFloat Rotate(in AVec3 angle);
+        public TVFloat Rotate(in RVec3 angle);
 
         /// <summary>
         /// Computes the squared magnitude of the vector.
@@ -185,8 +185,25 @@ namespace MathSharp
             return self.Components;
         }
 
-        /// <inheritdoc cref="Rotate(in AVec3)"/>
-        public static TVFloat IRotate(in TSelf self, in AVec3 angle) => throw new NotImplementedException();
+        /// <inheritdoc cref="Rotate(in RVec3)"/>
+        public static TVFloat IRotate(in TSelf self, in RVec3 angle)
+        {
+            TFloat cosX = ToTFloat(Math.Cos(angle.X.Radians));
+            TFloat sinX = ToTFloat(Math.Sin(angle.X.Radians));
+            TFloat cosY = ToTFloat(Math.Cos(angle.Y.Radians));
+            TFloat sinY = ToTFloat(Math.Sin(angle.Y.Radians));
+            TFloat cosZ = ToTFloat(Math.Cos(angle.Z.Radians));
+            TFloat sinZ = ToTFloat(Math.Sin(angle.Z.Radians));
+            TFloat x = ToTFloat(self.X);
+            TFloat y = ToTFloat(self.Y);
+            TFloat z = ToTFloat(self.Z);
+            return new TVFloat
+            {
+                X = x * (cosY * cosZ) + y * (sinX * sinY * cosZ - cosX * sinZ) + z * (cosX * sinY * cosZ + sinX * sinZ),
+                Y = x * (cosY * sinZ) + y * (sinX * sinY * sinZ + cosX * cosZ) + z * (cosX * sinY * sinZ - sinX * cosZ),
+                Z = x * -sinY + y * sinX * cosY + z * cosX * cosY
+            };
+        }
 
         /// <inheritdoc cref="Mag2"/>
         public static TBase IMag2(in TSelf self) => self.X * self.X + self.Y * self.Y + self.Z * self.Z;

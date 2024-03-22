@@ -6,12 +6,8 @@ namespace MathSharpDriver
     {
         static void Main(string[] args)
         {
-            FVec2 fVec2 = new FVec2(1, 2);
-            Vec2 vec2 = new Vec2(1, 2);
-            for (int i = 0; i < 10000000; i++)
-            {
-                vec2.Rotate(new Radian(1));
-            }
+            FVec3 fVec = new FVec3(1, 0, 0);
+            Console.WriteLine(fVec.Rotate(new DVec3(0, 90, 0)));
         }
     }
 }

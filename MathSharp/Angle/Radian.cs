@@ -7,22 +7,26 @@ namespace MathSharp
     /// <summary>
     /// Radiant representation of an angle.
     /// </summary>
-    public struct Radian : IAngle, IFloatingPoint<Radian>
+    public struct Radian : IFloatingPoint<Radian>
     {
+        /// <summary>
+        /// Radian representation of the angle.
+        /// </summary>
+        public double Radians { get; private set; }
 
         /// <summary>
-        /// Creates a new <see cref="Degree"/> with the given degrees.
+        /// Degree representation of the angle.
+        /// </summary>
+        public double Degrees { get; private set; }
+
+        /// <summary>
+        /// Creates a new <see cref="Radian"/> with the given radians.
         /// </summary>
         public Radian(double radians)
         {
             Radians = radians;
+            Degrees = radians * 180 / Math.PI;
         }
-
-        /// <inheritdoc cref="IAngle.Degrees"/>
-        public double Radians { get; private set; }
-
-        /// <inheritdoc cref="IAngle.Degrees"/>
-        public double Degrees => Radians * 180 / Math.PI;
 
         /// <inheritdoc/>
         public static Radian E => new Radian(double.E);

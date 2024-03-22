@@ -45,7 +45,7 @@
         public Vec2(int x, int y) { X = x; Y = y; }
 
         /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.Rotate"/>
-        public FVec2 Rotate(IAngle angle) => IVec2<Vec2, int, double, FVec2>.IRotate(this, angle);
+        public FVec2 Rotate(Radian angle) => IVec2<Vec2, int, double, FVec2>.IRotate(this, angle);
 
         /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.Mag2"/>
         public int Mag2() => IVec2<Vec2, int, double, FVec2>.IMag2(this);
