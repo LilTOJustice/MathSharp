@@ -11,7 +11,7 @@
         /// <param name="input"></param>
         /// <param name="modulo"></param>
         /// <returns></returns>
-        public static int Mod(int input, int modulo)
+        public static double Mod(double input, double modulo)
         {
             return (input % modulo + modulo) % modulo;
         }
