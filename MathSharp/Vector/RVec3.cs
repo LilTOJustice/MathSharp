@@ -84,11 +84,17 @@
         /// <inheritdoc cref="IVec3{TSelf, TBase, TFloat, TVFloat}.IMul(in TSelf, TBase)"/>
         public static RVec3 operator *(in RVec3 lhs, Radian scalar) => IVec3<RVec3, Radian, Radian, RVec3>.IMul(lhs, scalar);
 
+        /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.IMul(in TSelf, TBase)"/>
+        public static RVec3 operator *(in RVec3 lhs, double scalar) => new RVec3(lhs.X.Radians * scalar, lhs.Y.Radians * scalar, lhs.Y.Radians * scalar);
+
         /// <inheritdoc cref="IVec3{TSelf, TBase, TFloat, TVFloat}.IDiv(in TSelf, in TSelf)"/>
         public static RVec3 operator /(in RVec3 lhs, in RVec3 rhs) => IVec3<RVec3, Radian, Radian, RVec3>.IDiv(lhs, rhs);
 
         /// <inheritdoc cref="IVec3{TSelf, TBase, TFloat, TVFloat}.IDiv(in TSelf, TBase)"/>
         public static RVec3 operator /(in RVec3 lhs, Radian scalar) => IVec3<RVec3, Radian, Radian, RVec3>.IDiv(lhs, scalar);
+
+        /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.IMul(in TSelf, TBase)"/>
+        public static RVec3 operator /(in RVec3 lhs, double scalar) => new RVec3(lhs.X.Radians / scalar, lhs.Y.Radians / scalar, lhs.Y.Radians / scalar);
 
         /// <inheritdoc cref="Equals(RVec3)"/>
         public static bool operator ==(in RVec3 lhs, in RVec3 rhs) => lhs.Equals(rhs);

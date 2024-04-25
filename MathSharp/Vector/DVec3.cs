@@ -84,11 +84,17 @@
         /// <inheritdoc cref="IVec3{TSelf, TBase, TFloat, TVFloat}.IMul(in TSelf, TBase)"/>
         public static DVec3 operator *(in DVec3 lhs, Degree scalar) => IVec3<DVec3, Degree, Degree, DVec3>.IMul(lhs, scalar);
 
+        /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.IMul(in TSelf, TBase)"/>
+        public static DVec3 operator *(in DVec3 lhs, double scalar) => new DVec3(lhs.X.Degrees * scalar, lhs.Y.Degrees * scalar, lhs.Y.Degrees * scalar);
+
         /// <inheritdoc cref="IVec3{TSelf, TBase, TFloat, TVFloat}.IDiv(in TSelf, in TSelf)"/>
         public static DVec3 operator /(in DVec3 lhs, in DVec3 rhs) => IVec3<DVec3, Degree, Degree, DVec3>.IDiv(lhs, rhs);
 
         /// <inheritdoc cref="IVec3{TSelf, TBase, TFloat, TVFloat}.IDiv(in TSelf, TBase)"/>
         public static DVec3 operator /(in DVec3 lhs, Degree scalar) => IVec3<DVec3, Degree, Degree, DVec3>.IDiv(lhs, scalar);
+
+        /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.IMul(in TSelf, TBase)"/>
+        public static DVec3 operator /(in DVec3 lhs, double scalar) => new DVec3(lhs.X.Degrees / scalar, lhs.Y.Degrees / scalar, lhs.Y.Degrees / scalar);
 
         /// <inheritdoc cref="Equals(DVec3)"/>
         public static bool operator ==(in DVec3 lhs, in DVec3 rhs) => lhs.Equals(rhs);
