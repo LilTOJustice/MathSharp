@@ -28,6 +28,11 @@ namespace MathSharp
             Degrees = radians * 180 / Math.PI;
         }
 
+        /// <summary>
+        /// Converts radians to a degree representation.
+        /// </summary>
+        public static implicit operator Degree(Radian radians) => new Degree(radians.Degrees);
+
         /// <inheritdoc/>
         public static Radian E => new Radian(double.E);
 
