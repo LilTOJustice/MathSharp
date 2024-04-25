@@ -52,6 +52,24 @@
         /// <inheritdoc cref="IVec3{TSelf, TBase, TFloat, TVFloat}.Rotate"/>
         public FVec3 Rotate(in RVec3 angle) => IVec3<FVec3, double, double, FVec3>.IRotate(this, angle);
 
+        /// <summary>
+        /// Rotate the vector around an axis-angle representation of a quaternion.
+        /// </summary>
+        /// <param name="angle">The angle to rotate by.</param>
+        /// <param name="direction">Direction to rotate around. Must be normalized!</param>
+        public FVec3 Rotate(Radian angle, FVec3 direction)
+        {
+            return new Quaternion(angle, direction).RotatePoint(this);
+        }
+
+        /// <summary>
+        /// Rotate the vector around a quaternion.
+        /// </summary>
+        public FVec3 Rotate(in Quaternion quaternion)
+        {
+            return quaternion.RotatePoint(this);
+        }
+
         /// <inheritdoc cref="IVec3{TSelf, TBase, TFloat, TVFloat}.Mag2"/>
         public double Mag2() => IVec3<FVec3, double, double, FVec3>.IMag2(this);
 
