@@ -5,7 +5,7 @@ namespace MathSharp
     /// <typeparam name="TSelf">Type implementing the interface.</typeparam>
     /// <typeparam name="TBase">Base type of the vector. Must be of type <see cref="INumber{TSelf}"/>.</typeparam>
     /// <typeparam name="TFloat">Type used for forced float situations (such as <see cref="Mag"/>). Must be of type <see cref="IFloatingPoint{TSelf}"/>.</typeparam>
-    /// <typeparam name="TVFloat">Type used for forced vector float situations (such as <see cref="Norm"/>). Must be of type <see cref="IVec3{TSelf, TBase, TFloat, TVFloat}"/>.</typeparam>
+    /// <typeparam name="TVFloat">Type used for forced vector float situations (such as <see cref="Norm()"/>). Must be of type <see cref="IVec3{TSelf, TBase, TFloat, TVFloat}"/>.</typeparam>
     public interface IVec4<TSelf, TBase, TFloat, TVFloat>
         where TSelf :
         struct,
@@ -78,6 +78,11 @@ namespace MathSharp
         /// Computes the normalized vector.
         /// </summary>
         public TVFloat Norm();
+
+        /// <summary>
+        /// Computes the normalized vector and returns the magnitude.
+        /// </summary>
+        public TVFloat Norm(out double mag);
 
         /// <summary>
         /// Gets the string representation of the vector.
@@ -202,7 +207,7 @@ namespace MathSharp
         /// <inheritdoc cref="Dot"/>
         public static TBase IDot(in TSelf self, in TSelf other) => self.X * other.X + self.Y * other.Y + self.Z * other.Z + self.W * other.W;
 
-        /// <inheritdoc cref="Norm"/>
+        /// <inheritdoc cref="Norm()"/>
         public static TVFloat INorm(in TSelf self) => IFDiv(self, self.Mag());
 
         /// <summary>
@@ -238,6 +243,10 @@ namespace MathSharp
         /// </summary>
         public static TSelf IDiv(in TSelf self, in TSelf other)
             => new TSelf { X = self.X / other.X, Y = self.Y / other.Y, Z = self.Z / other.Z, W = self.W / other.W };
+
+        /// <inheritdoc cref="IDiv(in TSelf, TBase)"/>
+        public static TVFloat IFDiv(TFloat scalar, in TSelf self)
+            => new TVFloat { X = scalar / ToTFloat(self.X), Y = scalar / ToTFloat(self.Y), Z = scalar / ToTFloat(self.Z), W = scalar / ToTFloat(self.W) };
 
         /// <summary>
         /// Computes the division of a vector by a scalar.

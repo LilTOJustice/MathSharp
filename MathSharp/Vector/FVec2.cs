@@ -61,10 +61,15 @@
         /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.Cross2d"/>
         public double Cross2d(in FVec2 rhs) => IVec2<FVec2, double, double, FVec2>.ICross2d(this, rhs);
 
-        /// <summary>
-        /// Computes the normalized vector.
-        /// </summary>
-        public FVec2 Norm() => this / Mag();
+        /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.Norm()"/>
+        public FVec2 Norm() => IVec2<FVec2, double, double, FVec2>.INorm(this);
+
+        /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.Norm()"/>
+        public FVec2 Norm(out double mag)
+        {
+            mag = Mag();
+            return this / mag;
+        }
 
         /// <summary>
         /// Computes the cross product between two vectors <see href="https://en.wikipedia.org/wiki/Cross_product"/>.
@@ -89,11 +94,17 @@
         /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.IMul(in TSelf, TBase)"/>
         public static FVec2 operator *(in FVec2 lhs, double scalar) => IVec2<FVec2, double, double, FVec2>.IMul(lhs, scalar);
 
+        /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.IMul(in TSelf, TBase)"/>
+        public static FVec2 operator *(double scalar, in FVec2 rhs) => IVec2<FVec2, double, double, FVec2>.IMul(rhs, scalar);
+
         /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.IDiv(in TSelf, in TSelf)"/>
         public static FVec2 operator /(in FVec2 lhs, in FVec2 rhs) => IVec2<FVec2, double, double, FVec2>.IDiv(lhs, rhs);
 
         /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.IDiv(in TSelf, TBase)"/>
         public static FVec2 operator /(in FVec2 lhs, double scalar) => IVec2<FVec2, double, double, FVec2>.IDiv(lhs, scalar);
+
+        /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.IDiv(in TSelf, TBase)"/>
+        public static FVec2 operator /(double scalar, in FVec2 rhs) => IVec2<FVec2, double, double, FVec2>.IDiv(rhs, scalar);
 
         /// <inheritdoc cref="Equals(FVec2)"/>
         public static bool operator ==(in FVec2 lhs, in FVec2 rhs) => lhs.Equals(rhs);

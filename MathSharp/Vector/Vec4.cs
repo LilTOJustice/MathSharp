@@ -63,8 +63,15 @@
         /// <inheritdoc cref="IVec4{TSelf, TBase, TFloat, TVFloat}.Dot"/>
         public int Dot(in Vec4 other) => IVec4<Vec4, int, double, FVec4>.IDot(this, other);
 
-        /// <inheritdoc cref="IVec4{TSelf, TBase, TFloat, TVFloat}.Norm"/>
+        /// <inheritdoc cref="IVec4{TSelf, TBase, TFloat, TVFloat}.Norm()"/>
         public FVec4 Norm() => IVec4<Vec4, int, double, FVec4>.INorm(this);
+
+        /// <inheritdoc cref="IVec4{TSelf, TBase, TFloat, TVFloat}.Norm()"/>
+        public FVec4 Norm(out double mag)
+        {
+            mag = Mag();
+            return this / mag;
+        }
 
         /// <summary>
         /// Converts a float vector to an int vector.
@@ -84,7 +91,13 @@
         public static Vec4 operator *(in Vec4 lhs, int scalar) => IVec4<Vec4, int, double, FVec4>.IMul(lhs, scalar);
 
         /// <inheritdoc cref="IVec4{TSelf, TBase, TFloat, TVFloat}.IMul(in TSelf, TBase)"/>
+        public static Vec4 operator *(int scalar, in Vec4 rhs) => IVec4<Vec4, int, double, FVec4>.IMul(rhs, scalar);
+
+        /// <inheritdoc cref="IVec4{TSelf, TBase, TFloat, TVFloat}.IMul(in TSelf, TBase)"/>
         public static FVec4 operator *(in Vec4 lhs, double scalar) => IVec4<Vec4, int, double, FVec4>.IFMul(lhs, scalar);
+
+        /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.IMul(in TSelf, TBase)"/>
+        public static FVec4 operator *(double scalar, in Vec4 rhs) => IVec4<Vec4, int, double, FVec4>.IFMul(rhs, scalar);
 
         /// <inheritdoc cref="IVec4{TSelf, TBase, TFloat, TVFloat}.IDiv(in TSelf, in TSelf)"/>
         public static Vec4 operator /(in Vec4 lhs, in Vec4 rhs) => IVec4<Vec4, int, double, FVec4>.IDiv(lhs, rhs);
@@ -92,8 +105,14 @@
         /// <inheritdoc cref="IVec4{TSelf, TBase, TFloat, TVFloat}.IDiv(in TSelf, TBase)"/>
         public static Vec4 operator /(in Vec4 lhs, int scalar) => IVec4<Vec4, int, double, FVec4>.IDiv(lhs, scalar);
 
+        /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.IDiv(in TSelf, TBase)"/>
+        public static Vec4 operator /(int scalar, in Vec4 rhs) => IVec4<Vec4, int, double, FVec4>.IDiv(rhs, scalar);
+
         /// <inheritdoc cref="IVec4{TSelf, TBase, TFloat, TVFloat}.IDiv(in TSelf, TBase)"/>
         public static FVec4 operator /(in Vec4 lhs, double scalar) => IVec4<Vec4, int, double, FVec4>.IFDiv(lhs, scalar);
+
+        /// <inheritdoc cref="IVec3{TSelf, TBase, TFloat, TVFloat}.IDiv(in TSelf, TBase)"/>
+        public static FVec4 operator /(double scalar, in Vec4 rhs) => IVec4<Vec4, int, double, FVec4>.IFDiv(rhs, scalar);
 
         /// <inheritdoc cref="IVec4{TSelf, TBase, TFloat, TVFloat}.IEquals(in TSelf, in TSelf)"/>
         public bool Equals(Vec4 other) => IVec4<Vec4, int, double, FVec4>.IEquals(this, other);
