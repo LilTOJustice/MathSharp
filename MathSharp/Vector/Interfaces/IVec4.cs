@@ -239,6 +239,10 @@ namespace MathSharp
         public static TSelf IDiv(in TSelf self, in TSelf other)
             => new TSelf { X = self.X / other.X, Y = self.Y / other.Y, Z = self.Z / other.Z, W = self.W / other.W };
 
+        /// <inheritdoc cref="IDiv(in TSelf, TBase)"/>
+        public static TVFloat IFDiv(TFloat scalar, in TSelf self)
+            => new TVFloat { X = scalar / ToTFloat(self.X), Y = scalar / ToTFloat(self.Y), Z = scalar / ToTFloat(self.Z), W = scalar / ToTFloat(self.W) };
+
         /// <summary>
         /// Computes the division of a vector by a scalar.
         /// </summary>

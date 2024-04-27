@@ -269,6 +269,10 @@ namespace MathSharp
         public static TVFloat IFDiv(in TSelf self, TFloat scalar)
             => new TVFloat { X = ToTFloat(self.X) / scalar, Y = ToTFloat(self.Y) / scalar, Z = ToTFloat(self.Z) / scalar };
 
+        /// <inheritdoc cref="IDiv(in TSelf, TBase)"/>
+        public static TVFloat IFDiv(TFloat scalar, in TSelf self)
+            => new TVFloat { X = scalar / ToTFloat(self.X), Y = scalar / ToTFloat(self.Y), Z = scalar / ToTFloat(self.Z) };
+
         /// <summary>
         /// Computes whether two vectors are equal.
         /// </summary>
