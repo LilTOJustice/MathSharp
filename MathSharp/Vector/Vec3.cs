@@ -106,14 +106,14 @@
         /// <inheritdoc cref="IVec3{TSelf, TBase, TFloat, TVFloat}.IDiv(in TSelf, TBase)"/>
         public static Vec3 operator /(in Vec3 lhs, int scalar) => IVec3<Vec3, int, double, FVec3>.IDiv(lhs, scalar);
 
-        /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.IDiv(in TSelf, TBase)"/>
-        public static Vec3 operator /(int scalar, in Vec3 rhs) => IVec3<Vec3, int, double, FVec3>.IDiv(rhs, scalar);
+        /// <inheritdoc cref="IVec3{TSelf, TBase, TFloat, TVFloat}.IDiv(in TSelf, TBase)"/>
+        public static Vec3 operator /(int scalar, in Vec3 rhs) => new Vec3(scalar / rhs.X, scalar / rhs.Y, scalar / rhs.Z);
 
         /// <inheritdoc cref="IVec3{TSelf, TBase, TFloat, TVFloat}.IDiv(in TSelf, TBase)"/>
         public static FVec3 operator /(in Vec3 lhs, double scalar) => IVec3<Vec3, int, double, FVec3>.IFDiv(lhs, scalar);
 
         /// <inheritdoc cref="IVec3{TSelf, TBase, TFloat, TVFloat}.IDiv(in TSelf, TBase)"/>
-        public static FVec3 operator /(double scalar, in Vec3 rhs) => IVec3<Vec3, int, double, FVec3>.IFDiv(rhs, scalar);
+        public static FVec3 operator /(double scalar, in Vec3 rhs) => new FVec3(scalar / rhs.X, scalar / rhs.Y, scalar / rhs.Z);
 
         /// <inheritdoc cref="Equals(Vec3)"/>
         public static bool operator ==(in Vec3 lhs, in Vec3 rhs) => lhs.Equals(rhs);

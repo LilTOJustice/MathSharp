@@ -99,7 +99,7 @@
         public static FVec4 operator /(in FVec4 lhs, double scalar) => IVec4<FVec4, double, double, FVec4>.IDiv(lhs, scalar);
 
         /// <inheritdoc cref="IVec4{TSelf, TBase, TFloat, TVFloat}.IDiv(in TSelf, TBase)"/>
-        public static FVec4 operator /(double scalar, in FVec4 rhs) => IVec4<FVec4, double, double, FVec4>.IDiv(rhs, scalar);
+        public static FVec4 operator /(double scalar, in FVec4 rhs) => new FVec4(scalar / rhs.X, scalar / rhs.Y, scalar / rhs.Z, scalar / rhs.W);
 
         /// <inheritdoc cref="IVec4{TSelf, TBase, TFloat, TVFloat}.IEquals(in TSelf, in TSelf)"/>
         public bool Equals(FVec4 other) => IVec4<FVec4, double, double, FVec4>.IEquals(this, other);
