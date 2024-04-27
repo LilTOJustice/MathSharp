@@ -102,11 +102,17 @@
         /// <inheritdoc cref="IVec3{TSelf, TBase, TFloat, TVFloat}.IMul(in TSelf, TBase)"/>
         public static FVec3 operator *(in FVec3 lhs, double scalar) => IVec3<FVec3, double, double, FVec3>.IMul(lhs, scalar);
 
+        /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.IMul(in TSelf, TBase)"/>
+        public static FVec3 operator *(double scalar, in FVec3 rhs) => IVec3<FVec3, double, double, FVec3>.IMul(rhs, scalar);
+
         /// <inheritdoc cref="IVec3{TSelf, TBase, TFloat, TVFloat}.IDiv(in TSelf, in TSelf)"/>
         public static FVec3 operator /(in FVec3 lhs, in FVec3 rhs) => IVec3<FVec3, double, double, FVec3>.IDiv(lhs, rhs);
 
         /// <inheritdoc cref="IVec3{TSelf, TBase, TFloat, TVFloat}.IDiv(in TSelf, TBase)"/>
         public static FVec3 operator /(in FVec3 lhs, double scalar) => IVec3<FVec3, double, double, FVec3>.IDiv(lhs, scalar);
+
+        /// <inheritdoc cref="IVec3{TSelf, TBase, TFloat, TVFloat}.IDiv(in TSelf, TBase)"/>
+        public static FVec3 operator /(double scalar, in FVec3 rhs) => IVec3<FVec3, double, double, FVec3>.IDiv(rhs, scalar);
 
         /// <inheritdoc cref="Equals(FVec3)"/>
         public static bool operator ==(in FVec3 lhs, in FVec3 rhs) => lhs.Equals(rhs);

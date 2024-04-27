@@ -87,6 +87,9 @@
         /// <inheritdoc cref="IVec3{TSelf, TBase, TFloat, TVFloat}.IMul(in TSelf, TBase)"/>
         public static FVec3 operator *(in Vec3 lhs, double scalar) => IVec3<Vec3, int, double, FVec3>.IFMul(lhs, scalar);
 
+        /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.IMul(in TSelf, TBase)"/>
+        public static FVec3 operator *(double scalar, in Vec3 rhs) => IVec3<Vec3, int, double, FVec3>.IFMul(rhs, scalar);
+
         /// <inheritdoc cref="IVec3{TSelf, TBase, TFloat, TVFloat}.IDiv(in TSelf, in TSelf)"/>
         public static Vec3 operator /(in Vec3 lhs, in Vec3 rhs) => IVec3<Vec3, int, double, FVec3>.IDiv(lhs, rhs);
 
@@ -95,6 +98,9 @@
 
         /// <inheritdoc cref="IVec3{TSelf, TBase, TFloat, TVFloat}.IDiv(in TSelf, TBase)"/>
         public static FVec3 operator /(in Vec3 lhs, double scalar) => IVec3<Vec3, int, double, FVec3>.IFDiv(lhs, scalar);
+
+        /// <inheritdoc cref="IVec3{TSelf, TBase, TFloat, TVFloat}.IDiv(in TSelf, TBase)"/>
+        public static FVec3 operator /(double scalar, in Vec3 rhs) => IVec3<Vec3, int, double, FVec3>.IFDiv(rhs, scalar);
 
         /// <inheritdoc cref="Equals(Vec3)"/>
         public static bool operator ==(in Vec3 lhs, in Vec3 rhs) => lhs.Equals(rhs);
