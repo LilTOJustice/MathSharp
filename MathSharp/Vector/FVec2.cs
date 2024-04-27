@@ -104,7 +104,7 @@
         public static FVec2 operator /(in FVec2 lhs, double scalar) => IVec2<FVec2, double, double, FVec2>.IDiv(lhs, scalar);
 
         /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.IDiv(in TSelf, TBase)"/>
-        public static FVec2 operator /(double scalar, in FVec2 rhs) => IVec2<FVec2, double, double, FVec2>.IDiv(rhs, scalar);
+        public static FVec2 operator /(double scalar, in FVec2 rhs) => new FVec2(scalar / rhs.X, scalar / rhs.Y);
 
         /// <inheritdoc cref="Equals(FVec2)"/>
         public static bool operator ==(in FVec2 lhs, in FVec2 rhs) => lhs.Equals(rhs);

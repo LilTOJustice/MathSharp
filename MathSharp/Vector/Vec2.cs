@@ -105,13 +105,13 @@
         public static Vec2 operator /(in Vec2 lhs, int scalar) => IVec2<Vec2, int, double, FVec2>.IDiv(lhs, scalar);
 
         /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.IDiv(in TSelf, TBase)"/>
-        public static Vec2 operator /(int scalar, in Vec2 rhs) => IVec2<Vec2, int, double, FVec2>.IDiv(rhs, scalar);
+        public static Vec2 operator /(int scalar, in Vec2 rhs) => new Vec2(scalar / rhs.X, scalar / rhs.Y);
 
         /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.IDiv(in TSelf, TBase)"/>
         public static FVec2 operator /(in Vec2 lhs, double scalar) => IVec2<Vec2, int, double, FVec2>.IFDiv(lhs, scalar);
 
         /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.IDiv(in TSelf, TBase)"/>
-        public static FVec2 operator /(double scalar, in Vec2 rhs) => IVec2<Vec2, int, double, FVec2>.IFDiv(rhs, scalar);
+        public static FVec2 operator /(double scalar, in Vec2 rhs) => new FVec2(scalar / rhs.X, scalar / rhs.Y);
 
         /// <inheritdoc cref="Equals(Vec2)"/>
         public static bool operator ==(in Vec2 lhs, in Vec2 rhs) => lhs.Equals(rhs);
