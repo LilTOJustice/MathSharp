@@ -82,8 +82,15 @@
         /// <inheritdoc cref="IVec3{TSelf, TBase, TFloat, TVFloat}.Cross"/>
         public FVec3 Cross(in FVec3 rhs) => IVec3<FVec3, double, double, FVec3>.ICross(this, rhs);
 
-        /// <inheritdoc cref="IVec3{TSelf, TBase, TFloat, TVFloat}.Norm"/>
+        /// <inheritdoc cref="IVec3{TSelf, TBase, TFloat, TVFloat}.Norm()"/>
         public FVec3 Norm() => IVec3<FVec3, double, double, FVec3>.INorm(this);
+
+        /// <inheritdoc cref="IVec3{TSelf, TBase, TFloat, TVFloat}.Norm()"/>
+        public FVec3 Norm(out double mag)
+        {
+            mag = Mag();
+            return this / mag;
+        }
 
         /// <summary>
         /// Converts a floating point vector to an integer vector.

@@ -62,8 +62,15 @@
         /// <inheritdoc cref="IVec4{TSelf, TBase, TFloat, TVFloat}.Dot"/>
         public double Dot(in FVec4 other) => IVec4<FVec4, double, double, FVec4>.IDot(this, other);
 
-        /// <inheritdoc cref="IVec4{TSelf, TBase, TFloat, TVFloat}.Norm"/>
+        /// <inheritdoc cref="IVec4{TSelf, TBase, TFloat, TVFloat}.Norm()"/>
         public FVec4 Norm() => IVec4<FVec4, double, double, FVec4>.INorm(this);
+
+        /// <inheritdoc cref="IVec4{TSelf, TBase, TFloat, TVFloat}.Norm()"/>
+        public FVec4 Norm(out double mag)
+        {
+            mag = Mag();
+            return this / mag;
+        }
 
         /// <summary>
         /// Converts a float vector to an int vector.

@@ -59,8 +59,15 @@
         /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.Cross2d"/>
         public int Cross2d(in Vec2 rhs) => IVec2<Vec2, int, double, FVec2>.ICross2d(this, rhs);
 
-        /// <inheritdoc cref="FVec2.Norm"/>
-        public FVec2 Norm() => this / Mag();
+        /// <inheritdoc cref="FVec2.Norm()"/>
+        public FVec2 Norm() => IVec2<Vec2, int, double, FVec2>.INorm(this);
+
+        /// <inheritdoc cref="FVec2.Norm()"/>
+        public FVec2 Norm(out double mag)
+        {
+            mag = Mag();
+            return this / mag;
+        }
 
         /// <inheritdoc cref="FVec2.Cross"/>
         public Vec3 Cross(in Vec2 rhs) => new Vec3(0, 0, Cross2d(rhs));
