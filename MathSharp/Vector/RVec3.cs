@@ -89,7 +89,7 @@
         public static RVec3 operator *(in RVec3 lhs, in RVec3 rhs) => IVec3<RVec3, Radian, double, FVec3>.IMul(lhs, rhs);
 
         /// <inheritdoc cref="IVec3{TSelf, TBase, TFloat, TVFloat}.IMul(in TSelf, TBase)"/>
-        public static RVec3 operator *(in RVec3 lhs, double scalar) => new RVec3(lhs.X.Radians * scalar, lhs.Y.Radians * scalar, lhs.Y.Radians * scalar);
+        public static RVec3 operator *(in RVec3 lhs, double scalar) => new RVec3(lhs.X.Radians * scalar, lhs.Y.Radians * scalar, lhs.Z.Radians * scalar);
 
         /// <inheritdoc cref="IVec3{TSelf, TBase, TFloat, TVFloat}.IMul(in TSelf, TBase)"/>
         public static RVec3 operator *(double scalar, in RVec3 rhs) => rhs * scalar;
@@ -98,7 +98,7 @@
         public static RVec3 operator /(in RVec3 lhs, in RVec3 rhs) => IVec3<RVec3, Radian, double, FVec3>.IDiv(lhs, rhs);
 
         /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.IMul(in TSelf, TBase)"/>
-        public static RVec3 operator /(in RVec3 lhs, double scalar) => new RVec3(lhs.X.Radians / scalar, lhs.Y.Radians / scalar, lhs.Y.Radians / scalar);
+        public static RVec3 operator /(in RVec3 lhs, double scalar) => new RVec3(lhs.X.Radians / scalar, lhs.Y.Radians / scalar, lhs.Z.Radians / scalar);
 
         /// <inheritdoc cref="IVec2{TSelf, TBase, TFloat, TVFloat}.IDiv(in TSelf, TBase)"/>
         public static RVec3 operator /(double scalar, in RVec3 rhs) => new RVec3(scalar / rhs.X.Radians, scalar / rhs.Y.Radians, scalar / rhs.Z.Radians);
